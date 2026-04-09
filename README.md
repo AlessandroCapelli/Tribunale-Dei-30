@@ -35,13 +35,10 @@ Esempio di struttura:
 
 ```json
 {
-  "category": "Nome Categoria",
-  "icon": "🎯",
-  "color": "#e74c3c",
-  "phrases": [
-    "L'imputato è accusato di ...",
-    "L'imputato è accusato di ..."
-  ]
+	"category": "Nome Categoria",
+	"icon": "🎯",
+	"color": "#e74c3c",
+	"phrases": ["L'imputato è accusato di ...", "L'imputato è accusato di ..."]
 }
 ```
 

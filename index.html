@@ -1,126 +1,279 @@
 <!DOCTYPE html>
 <html lang="it">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Il Processo dei 30 Anni ⚖️</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 32px 16px;
-  }
-  .header { text-align: center; margin-bottom: 32px; }
-  .header .icon { font-size: 48px; margin-bottom: 8px; }
-  .header h1 {
-    font-size: 28px; font-weight: 800;
-    background: linear-gradient(90deg, #e74c3c, #f39c12, #e74c3c);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-  }
-  .header p { opacity: 0.6; margin-top: 8px; font-size: 14px; }
-  .filters { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; justify-content: center; }
-  .filters button {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    color: #fff; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.2s;
-  }
-  .filters button.active { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.4); }
-  .card {
-    width: 100%; max-width: 520px; min-height: 220px;
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 16px; padding: 32px 28px;
-    display: flex; flex-direction: column; justify-content: center; align-items: center;
-    text-align: center; margin-bottom: 24px; transition: all 0.3s ease;
-  }
-  .card .cat-label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 700; }
-  .card .phrase { font-size: 17px; line-height: 1.7; font-weight: 500; }
-  .card .placeholder { opacity: 0.5; font-size: 16px; }
-  .actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 16px; }
-  .btn-main {
-    background: linear-gradient(135deg, #e74c3c, #c0392b); border: none; color: #fff;
-    padding: 14px 32px; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: 700;
-    box-shadow: 0 4px 20px rgba(231,76,60,0.4); transition: transform 0.15s;
-  }
-  .btn-main:active { transform: scale(0.96); }
-  .btn-sec {
-    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-    color: #fff; padding: 14px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; transition: background 0.2s;
-  }
-  .btn-sec:hover { background: rgba(255,255,255,0.14); }
-  .counter { opacity: 0.5; font-size: 13px; }
-  .list-view { max-width: 700px; width: 100%; margin: 0 auto; }
-  .list-view h2 { text-align: center; margin-bottom: 24px; font-size: 22px; }
-  .list-section { margin-bottom: 32px; }
-  .list-section h3 { margin-bottom: 12px; font-size: 18px; }
-  .list-item {
-    background: rgba(255,255,255,0.07); padding: 10px 14px; margin-bottom: 6px;
-    border-radius: 0 6px 6px 0; font-size: 13px; line-height: 1.5;
-  }
-  .list-item.used { opacity: 0.4; background: rgba(255,255,255,0.03); }
-  .list-item .num { font-weight: 700; margin-right: 8px; }
-  .loading { text-align: center; margin-top: 80px; opacity: 0.6; font-size: 18px; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .fade-in { animation: fadeIn 0.35s ease; }
-</style>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Il Processo dei 30 Anni ⚖️</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			min-height: 100vh;
+			background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+			font-family: 'Segoe UI', system-ui, sans-serif;
+			color: #fff;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			padding: 32px 16px;
+		}
+
+		.header {
+			text-align: center;
+			margin-bottom: 32px;
+		}
+
+		.header .icon {
+			font-size: 48px;
+			margin-bottom: 8px;
+		}
+
+		.header h1 {
+			font-size: 28px;
+			font-weight: 800;
+			background: linear-gradient(90deg, #e74c3c, #f39c12, #e74c3c);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.header p {
+			opacity: 0.6;
+			margin-top: 8px;
+			font-size: 14px;
+		}
+
+		.filters {
+			display: flex;
+			gap: 8px;
+			margin-bottom: 24px;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		.filters button {
+			background: rgba(255, 255, 255, 0.06);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			color: #fff;
+			padding: 6px 14px;
+			border-radius: 20px;
+			cursor: pointer;
+			font-size: 13px;
+			transition: all 0.2s;
+		}
+
+		.filters button.active {
+			background: rgba(255, 255, 255, 0.2);
+			border-color: rgba(255, 255, 255, 0.4);
+		}
+
+		.card {
+			width: 100%;
+			max-width: 520px;
+			min-height: 220px;
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 16px;
+			padding: 32px 28px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			margin-bottom: 24px;
+			transition: all 0.3s ease;
+		}
+
+		.card .cat-label {
+			font-size: 11px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			margin-bottom: 12px;
+			font-weight: 700;
+		}
+
+		.card .phrase {
+			font-size: 17px;
+			line-height: 1.7;
+			font-weight: 500;
+		}
+
+		.card .placeholder {
+			opacity: 0.5;
+			font-size: 16px;
+		}
+
+		.actions {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin-bottom: 16px;
+		}
+
+		.btn-main {
+			background: linear-gradient(135deg, #e74c3c, #c0392b);
+			border: none;
+			color: #fff;
+			padding: 14px 32px;
+			border-radius: 12px;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: 700;
+			box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
+			transition: transform 0.15s;
+		}
+
+		.btn-main:active {
+			transform: scale(0.96);
+		}
+
+		.btn-sec {
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			color: #fff;
+			padding: 14px 20px;
+			border-radius: 12px;
+			cursor: pointer;
+			font-size: 14px;
+			transition: background 0.2s;
+		}
+
+		.btn-sec:hover {
+			background: rgba(255, 255, 255, 0.14);
+		}
+
+		.counter {
+			opacity: 0.5;
+			font-size: 13px;
+		}
+
+		.list-view {
+			max-width: 700px;
+			width: 100%;
+			margin: 0 auto;
+		}
+
+		.list-view h2 {
+			text-align: center;
+			margin-bottom: 24px;
+			font-size: 22px;
+		}
+
+		.list-section {
+			margin-bottom: 32px;
+		}
+
+		.list-section h3 {
+			margin-bottom: 12px;
+			font-size: 18px;
+		}
+
+		.list-item {
+			background: rgba(255, 255, 255, 0.07);
+			padding: 10px 14px;
+			margin-bottom: 6px;
+			border-radius: 0 6px 6px 0;
+			font-size: 13px;
+			line-height: 1.5;
+		}
+
+		.list-item.used {
+			opacity: 0.4;
+			background: rgba(255, 255, 255, 0.03);
+		}
+
+		.list-item .num {
+			font-weight: 700;
+			margin-right: 8px;
+		}
+
+		.loading {
+			text-align: center;
+			margin-top: 80px;
+			opacity: 0.6;
+			font-size: 18px;
+		}
+
+		@keyframes fadeIn {
+			from {
+				opacity: 0;
+				transform: translateY(10px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+
+		.fade-in {
+			animation: fadeIn 0.35s ease;
+		}
+	</style>
 </head>
+
 <body>
 
-<div id="app"><div class="loading">⚖️ Caricamento accuse...</div></div>
+	<div id="app">
+		<div class="loading">⚖️ Caricamento accuse...</div>
+	</div>
 
-<script>
-let data = [];
-let allPhrases = [];
-let usedIndices = new Set();
-let currentIndex = null;
-let filterCat = null;
-let showAll = false;
+	<script>
+		let data = [];
+		let allPhrases = [];
+		let usedIndices = new Set();
+		let currentIndex = null;
+		let filterCat = null;
+		let showAll = false;
 
-fetch('data.json')
-  .then(r => r.json())
-  .then(json => {
-    data = json;
-    allPhrases = data.flatMap(cat => cat.phrases);
-    render();
-  })
-  .catch(() => {
-    document.getElementById('app').innerHTML = '<div class="loading">Errore nel caricamento di data.json</div>';
-  });
+		fetch('data.json')
+			.then(r => r.json())
+			.then(json => {
+				data = json;
+				allPhrases = data.flatMap(cat => cat.phrases);
+				render();
+			})
+			.catch(() => {
+				document.getElementById('app').innerHTML =
+					'<div class="loading">Errore nel caricamento di data.json</div>';
+			});
 
-function getCategoryForIndex(index) {
-  let count = 0;
-  for (const cat of data) {
-    if (index < count + cat.phrases.length) return cat;
-    count += cat.phrases.length;
-  }
-  return null;
-}
+		function getCategoryForIndex(index) {
+			let count = 0;
+			for (const cat of data) {
+				if (index < count + cat.phrases.length) return cat;
+				count += cat.phrases.length;
+			}
+			return null;
+		}
 
-function getCategoryRange(catIndex) {
-  let start = 0;
-  for (let i = 0; i < catIndex; i++) start += data[i].phrases.length;
-  return [start, start + data[catIndex].phrases.length - 1];
-}
+		function getCategoryRange(catIndex) {
+			let start = 0;
+			for (let i = 0; i < catIndex; i++) start += data[i].phrases.length;
+			return [start, start + data[catIndex].phrases.length - 1];
+		}
 
-function render() {
-  const app = document.getElementById('app');
-  app.innerHTML = showAll ? renderList() : renderGame();
-  bindEvents();
-}
+		function render() {
+			const app = document.getElementById('app');
+			app.innerHTML = showAll ? renderList() : renderGame();
+			bindEvents();
+		}
 
-function renderGame() {
-  const cat = currentIndex !== null ? getCategoryForIndex(currentIndex) : null;
-  let total = allPhrases.length;
-  if (filterCat !== null) {
-    const [s, e] = getCategoryRange(filterCat);
-    total = e - s + 1;
-  }
+		function renderGame() {
+			const cat = currentIndex !== null ? getCategoryForIndex(currentIndex) : null;
+			let total = allPhrases.length;
+			if (filterCat !== null) {
+				const [s, e] = getCategoryRange(filterCat);
+				total = e - s + 1;
+			}
 
-  return `
+			return `
     <div class="header">
       <div class="icon">⚖️</div>
       <h1>IL PROCESSO DEI 30 ANNI</h1>
@@ -149,11 +302,11 @@ function renderGame() {
     </div>
     <p class="counter">Accuse estratte: ${usedIndices.size} / ${total}</p>
   `;
-}
+		}
 
-function renderList() {
-  let globalIndex = 0;
-  return `
+		function renderList() {
+			let globalIndex = 0;
+			return `
     <div class="list-view">
       <button class="btn-sec" id="backToGame" style="margin-bottom:24px">← Torna al gioco</button>
       <h2>📜 Tutte le ${allPhrases.length} Accuse</h2>
@@ -164,45 +317,62 @@ function renderList() {
             <span class="num" style="color:${cat.color}">#${idx + 1}</span>${p}
           </div>`;
         }).join('');
-        return `<div class="list-section"><h3 style="color:${cat.color}">${cat.icon} ${cat.category}</h3>${items}</div>`;
+        return ` < div class = "list-section" > < h3 style = "color:${cat.color}" > $ {
+				cat.icon
+			}
+			$ {
+				cat.category
+			} < /h3>${items}</div > `;
       }).join('')}
     </div>
   `;
-}
+		}
 
-function bindEvents() {
-  const drawBtn = document.getElementById('draw');
-  const resetBtn = document.getElementById('reset');
-  const showAllBtn = document.getElementById('showAll');
-  const backBtn = document.getElementById('backToGame');
+		function bindEvents() {
+			const drawBtn = document.getElementById('draw');
+			const resetBtn = document.getElementById('reset');
+			const showAllBtn = document.getElementById('showAll');
+			const backBtn = document.getElementById('backToGame');
 
-  if (drawBtn) drawBtn.addEventListener('click', () => {
-    let available;
-    if (filterCat !== null) {
-      const [s, e] = getCategoryRange(filterCat);
-      available = [];
-      for (let i = s; i <= e; i++) if (!usedIndices.has(i)) available.push(i);
-    } else {
-      available = allPhrases.map((_, i) => i).filter(i => !usedIndices.has(i));
-    }
-    if (available.length === 0) return;
-    currentIndex = available[Math.floor(Math.random() * available.length)];
-    usedIndices.add(currentIndex);
-    render();
-  });
+			if (drawBtn) drawBtn.addEventListener('click', () => {
+				let available;
+				if (filterCat !== null) {
+					const [s, e] = getCategoryRange(filterCat);
+					available = [];
+					for (let i = s; i <= e; i++)
+						if (!usedIndices.has(i)) available.push(i);
+				} else {
+					available = allPhrases.map((_, i) => i).filter(i => !usedIndices.has(i));
+				}
+				if (available.length === 0) return;
+				currentIndex = available[Math.floor(Math.random() * available.length)];
+				usedIndices.add(currentIndex);
+				render();
+			});
 
-  if (resetBtn) resetBtn.addEventListener('click', () => { usedIndices = new Set(); currentIndex = null; render(); });
-  if (showAllBtn) showAllBtn.addEventListener('click', () => { showAll = true; render(); });
-  if (backBtn) backBtn.addEventListener('click', () => { showAll = false; render(); });
+			if (resetBtn) resetBtn.addEventListener('click', () => {
+				usedIndices = new Set();
+				currentIndex = null;
+				render();
+			});
+			if (showAllBtn) showAllBtn.addEventListener('click', () => {
+				showAll = true;
+				render();
+			});
+			if (backBtn) backBtn.addEventListener('click', () => {
+				showAll = false;
+				render();
+			});
 
-  document.querySelectorAll('[data-filter]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const val = btn.dataset.filter;
-      filterCat = val === 'all' ? null : parseInt(val);
-      render();
-    });
-  });
-}
-</script>
+			document.querySelectorAll('[data-filter]').forEach(btn => {
+				btn.addEventListener('click', () => {
+					const val = btn.dataset.filter;
+					filterCat = val === 'all' ? null : parseInt(val);
+					render();
+				});
+			});
+		}
+	</script>
 </body>
+
 </html>
