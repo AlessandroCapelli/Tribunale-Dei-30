@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Il Processo dei 30 Anni ⚖️</title>
+	<title>Il Tribunale dei 30 Anni ⚖️</title>
 	<style>
 		* {
 			margin: 0;
@@ -20,12 +20,13 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			padding: 32px 16px;
+			padding: 24px 16px;
+			overflow-x: hidden;
 		}
 
 		.header {
 			text-align: center;
-			margin-bottom: 32px;
+			margin-bottom: 24px;
 		}
 
 		.header .icon {
@@ -34,29 +35,92 @@
 		}
 
 		.header h1 {
-			font-size: 28px;
+			font-size: 26px;
 			font-weight: 800;
 			background: linear-gradient(90deg, #e74c3c, #f39c12, #e74c3c);
+			background-size: 200% 100%;
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 			background-clip: text;
+			animation: shimmer 3s ease-in-out infinite;
 		}
 
 		.header p {
 			opacity: 0.6;
 			margin-top: 8px;
-			font-size: 14px;
+			font-size: 13px;
 		}
 
-		.filters {
+		.container {
+			width: 100%;
+			max-width: 540px;
+		}
+
+		/* Setup */
+		.setup-card {
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 16px;
+			padding: 28px 24px;
+			margin-bottom: 16px;
+			animation: slideUp 0.4s ease;
+		}
+
+		.setup-card h2 {
+			font-size: 16px;
+			margin-bottom: 16px;
+			opacity: 0.8;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.form-group {
+			margin-bottom: 16px;
+		}
+
+		.form-group label {
+			display: block;
+			font-size: 13px;
+			opacity: 0.7;
+			margin-bottom: 6px;
+		}
+
+		.form-group input,
+		.form-group select {
+			width: 100%;
+			padding: 12px 14px;
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 10px;
+			color: #fff;
+			font-size: 15px;
+			font-family: inherit;
+			outline: none;
+			transition: border-color 0.2s, box-shadow 0.2s;
+		}
+
+		.form-group input:focus,
+		.form-group select:focus {
+			border-color: rgba(231, 76, 60, 0.6);
+			box-shadow: 0 0 12px rgba(231, 76, 60, 0.15);
+		}
+
+		.form-group input::placeholder {
+			color: rgba(255, 255, 255, 0.3);
+		}
+
+		.form-group select option {
+			background: #1a1a2e;
+			color: #fff;
+		}
+
+		.cat-filters {
 			display: flex;
 			gap: 8px;
-			margin-bottom: 24px;
 			flex-wrap: wrap;
-			justify-content: center;
 		}
 
-		.filters button {
+		.cat-filter {
 			background: rgba(255, 255, 255, 0.06);
 			border: 1px solid rgba(255, 255, 255, 0.1);
 			color: #fff;
@@ -64,73 +128,178 @@
 			border-radius: 20px;
 			cursor: pointer;
 			font-size: 13px;
-			transition: all 0.2s;
+			transition: all 0.25s ease;
+			user-select: none;
 		}
 
-		.filters button.active {
+		.cat-filter.active {
 			background: rgba(255, 255, 255, 0.2);
 			border-color: rgba(255, 255, 255, 0.4);
+			transform: scale(1.05);
 		}
 
-		.card {
-			width: 100%;
-			max-width: 520px;
-			min-height: 220px;
-			background: rgba(255, 255, 255, 0.05);
-			border: 1px solid rgba(255, 255, 255, 0.1);
-			border-radius: 16px;
-			padding: 32px 28px;
+		/* Custom accusations */
+		.custom-input-row {
 			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
-			margin-bottom: 24px;
-			transition: all 0.3s ease;
-		}
-
-		.card .cat-label {
-			font-size: 11px;
-			text-transform: uppercase;
-			letter-spacing: 2px;
+			gap: 8px;
 			margin-bottom: 12px;
+		}
+
+		.custom-input-row input {
+			flex: 1;
+			padding: 10px 12px;
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 10px;
+			color: #fff;
+			font-size: 13px;
+			font-family: inherit;
+			outline: none;
+		}
+
+		.custom-input-row button {
+			padding: 10px 16px;
+			background: rgba(39, 174, 96, 0.3);
+			border: 1px solid #27ae60;
+			color: #27ae60;
+			border-radius: 10px;
+			cursor: pointer;
+			font-size: 13px;
 			font-weight: 700;
+			font-family: inherit;
+			white-space: nowrap;
+			transition: background 0.2s;
 		}
 
-		.card .phrase {
-			font-size: 17px;
-			line-height: 1.7;
-			font-weight: 500;
+		.custom-input-row button:hover {
+			background: rgba(39, 174, 96, 0.5);
 		}
 
-		.card .placeholder {
-			opacity: 0.5;
-			font-size: 16px;
+		.custom-list {
+			max-height: 200px;
+			overflow-y: auto;
 		}
 
-		.actions {
+		.custom-item {
 			display: flex;
-			gap: 12px;
-			flex-wrap: wrap;
-			justify-content: center;
-			margin-bottom: 16px;
+			justify-content: space-between;
+			align-items: center;
+			padding: 8px 12px;
+			margin-bottom: 4px;
+			background: rgba(255, 255, 255, 0.04);
+			border-radius: 8px;
+			font-size: 12px;
+			line-height: 1.4;
+			gap: 8px;
 		}
 
+		.custom-item span {
+			flex: 1;
+		}
+
+		.custom-item button {
+			background: none;
+			border: none;
+			color: #e74c3c;
+			cursor: pointer;
+			font-size: 16px;
+			padding: 0 4px;
+			opacity: 0.6;
+			transition: opacity 0.2s;
+		}
+
+		.custom-item button:hover {
+			opacity: 1;
+		}
+
+		.custom-count {
+			font-size: 11px;
+			opacity: 0.5;
+			margin-bottom: 8px;
+		}
+
+		/* Toggle row */
+		.toggle-row {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 12px;
+		}
+
+		.toggle-row label {
+			margin-bottom: 0;
+		}
+
+		.toggle {
+			position: relative;
+			width: 44px;
+			height: 24px;
+			cursor: pointer;
+		}
+
+		.toggle input {
+			display: none;
+		}
+
+		.toggle-slider {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(255, 255, 255, 0.15);
+			border-radius: 24px;
+			transition: background 0.3s;
+		}
+
+		.toggle-slider::before {
+			content: '';
+			position: absolute;
+			width: 18px;
+			height: 18px;
+			left: 3px;
+			bottom: 3px;
+			background: #fff;
+			border-radius: 50%;
+			transition: transform 0.3s;
+		}
+
+		.toggle input:checked+.toggle-slider {
+			background: #e74c3c;
+		}
+
+		.toggle input:checked+.toggle-slider::before {
+			transform: translateX(20px);
+		}
+
+		/* Buttons */
 		.btn-main {
+			width: 100%;
 			background: linear-gradient(135deg, #e74c3c, #c0392b);
 			border: none;
 			color: #fff;
-			padding: 14px 32px;
+			padding: 16px 32px;
 			border-radius: 12px;
 			cursor: pointer;
 			font-size: 16px;
 			font-weight: 700;
 			box-shadow: 0 4px 20px rgba(231, 76, 60, 0.4);
-			transition: transform 0.15s;
+			transition: transform 0.15s, box-shadow 0.15s;
+			font-family: inherit;
+		}
+
+		.btn-main:hover {
+			box-shadow: 0 6px 28px rgba(231, 76, 60, 0.5);
 		}
 
 		.btn-main:active {
 			transform: scale(0.96);
+		}
+
+		.btn-main:disabled {
+			opacity: 0.4;
+			cursor: not-allowed;
+			box-shadow: none;
 		}
 
 		.btn-sec {
@@ -141,56 +310,618 @@
 			border-radius: 12px;
 			cursor: pointer;
 			font-size: 14px;
-			transition: background 0.2s;
+			font-family: inherit;
+			transition: background 0.2s, transform 0.15s;
 		}
 
 		.btn-sec:hover {
 			background: rgba(255, 255, 255, 0.14);
 		}
 
-		.counter {
-			opacity: 0.5;
-			font-size: 13px;
+		.btn-sec:active {
+			transform: scale(0.97);
 		}
 
-		.list-view {
-			max-width: 700px;
-			width: 100%;
-			margin: 0 auto;
-		}
-
-		.list-view h2 {
+		/* Game card */
+		.game-card {
+			background: rgba(255, 255, 255, 0.05);
+			border: 1px solid rgba(255, 255, 255, 0.1);
+			border-radius: 16px;
+			padding: 28px 24px;
+			margin-bottom: 16px;
 			text-align: center;
-			margin-bottom: 24px;
-			font-size: 22px;
 		}
 
-		.list-section {
-			margin-bottom: 32px;
+		/* Scoreboard */
+		.scoreboard {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 12px;
+			margin-bottom: 20px;
+			animation: slideUp 0.3s ease;
 		}
 
-		.list-section h3 {
-			margin-bottom: 12px;
-			font-size: 18px;
+		.score-player {
+			flex: 1;
+			text-align: center;
+			padding: 12px 8px;
+			border-radius: 12px;
+			background: rgba(255, 255, 255, 0.06);
+			border: 2px solid transparent;
+			transition: all 0.4s ease;
 		}
 
-		.list-item {
-			background: rgba(255, 255, 255, 0.07);
-			padding: 10px 14px;
-			margin-bottom: 6px;
-			border-radius: 0 6px 6px 0;
+		.score-player.active-turn {
+			border-color: #f39c12;
+			background: rgba(243, 156, 18, 0.1);
+			animation: glowPulse 1.5s ease-in-out infinite;
+		}
+
+		.score-player .name {
 			font-size: 13px;
-			line-height: 1.5;
-		}
-
-		.list-item.used {
-			opacity: 0.4;
-			background: rgba(255, 255, 255, 0.03);
-		}
-
-		.list-item .num {
 			font-weight: 700;
-			margin-right: 8px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			margin-bottom: 4px;
+		}
+
+		.score-player .points {
+			font-size: 28px;
+			font-weight: 800;
+			background: linear-gradient(90deg, #e74c3c, #f39c12);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+			transition: transform 0.3s ease;
+		}
+
+		.score-player .points.bump {
+			animation: scoreBump 0.5s ease;
+		}
+
+		.score-label {
+			font-size: 10px;
+			opacity: 0.5;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.score-vs {
+			font-size: 14px;
+			font-weight: 700;
+			opacity: 0.5;
+		}
+
+		.round-badge {
+			display: inline-block;
+			background: rgba(255, 255, 255, 0.1);
+			padding: 4px 14px;
+			border-radius: 20px;
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+			margin-bottom: 16px;
+		}
+
+		/* Narration */
+		.narration {
+			background: rgba(243, 156, 18, 0.08);
+			border-left: 3px solid #f39c12;
+			border-radius: 0 10px 10px 0;
+			padding: 16px 18px;
+			margin: 16px 0;
+			text-align: left;
+			font-size: 14px;
+			line-height: 1.7;
+			font-style: italic;
+		}
+
+		.narration .label {
+			font-size: 11px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			color: #f39c12;
+			font-weight: 700;
+			font-style: normal;
+			margin-bottom: 8px;
+		}
+
+		/* Charge */
+		.charge-text {
+			font-size: 16px;
+			line-height: 1.7;
+			font-weight: 500;
+			margin: 16px 0;
+		}
+
+		.charge-cat {
+			font-size: 11px;
+			text-transform: uppercase;
+			letter-spacing: 2px;
+			font-weight: 700;
+			margin-bottom: 8px;
+		}
+
+		/* Timer */
+		.timer-container {
+			display: flex;
+			justify-content: center;
+			margin: 16px 0;
+		}
+
+		.timer-circle {
+			position: relative;
+			width: 80px;
+			height: 80px;
+		}
+
+		.timer-circle svg {
+			transform: rotate(-90deg);
+			width: 80px;
+			height: 80px;
+		}
+
+		.timer-circle .bg {
+			fill: none;
+			stroke: rgba(255, 255, 255, 0.1);
+			stroke-width: 4;
+		}
+
+		.timer-circle .progress {
+			fill: none;
+			stroke: #27ae60;
+			stroke-width: 4;
+			stroke-linecap: round;
+			stroke-dasharray: 226;
+			stroke-dashoffset: 0;
+			transition: stroke-dashoffset 1s linear, stroke 0.3s;
+		}
+
+		.timer-circle .progress.warning {
+			stroke: #f39c12;
+		}
+
+		.timer-circle .progress.danger {
+			stroke: #e74c3c;
+		}
+
+		.timer-circle .progress.expired {
+			stroke: #e74c3c;
+			animation: timerFlash 0.5s ease infinite;
+		}
+
+		.timer-text {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 22px;
+			font-weight: 800;
+		}
+
+		/* Vote buttons */
+		.vote-buttons {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			margin: 16px 0;
+		}
+
+		.btn-vote {
+			padding: 18px 24px;
+			border-radius: 12px;
+			cursor: pointer;
+			font-size: 16px;
+			font-weight: 700;
+			font-family: inherit;
+			transition: all 0.2s;
+			border: 2px solid;
+		}
+
+		.btn-vote:active {
+			transform: scale(0.97);
+		}
+
+		.btn-vote-p1 {
+			background: rgba(231, 76, 60, 0.15);
+			border-color: #e74c3c;
+			color: #e74c3c;
+		}
+
+		.btn-vote-p1:hover {
+			background: rgba(231, 76, 60, 0.3);
+		}
+
+		.btn-vote-p2 {
+			background: rgba(52, 152, 219, 0.15);
+			border-color: #3498db;
+			color: #3498db;
+		}
+
+		.btn-vote-p2:hover {
+			background: rgba(52, 152, 219, 0.3);
+		}
+
+		.btn-vote-draw {
+			background: rgba(243, 156, 18, 0.15);
+			border-color: #f39c12;
+			color: #f39c12;
+			font-size: 14px;
+			padding: 14px 20px;
+		}
+
+		.btn-vote-draw:hover {
+			background: rgba(243, 156, 18, 0.3);
+		}
+
+		/* Result */
+		.result-icon {
+			font-size: 56px;
+			margin-bottom: 12px;
+		}
+
+		.result-text {
+			font-size: 18px;
+			font-weight: 700;
+			margin-bottom: 8px;
+		}
+
+		.result-penalty {
+			font-size: 14px;
+			opacity: 0.7;
+			margin-bottom: 16px;
+		}
+
+		/* Verdict animation */
+		.verdict-guilty .result-icon {
+			animation: gavelSmash 0.6s ease;
+		}
+
+		.verdict-guilty .result-text {
+			animation: shakeText 0.5s ease 0.3s;
+		}
+
+		.verdict-draw .result-icon {
+			animation: scalePop 0.5s ease;
+		}
+
+		/* Rounds recap */
+		.rounds-recap {
+			text-align: left;
+			margin: 16px 0;
+		}
+
+		.recap-row {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 8px 12px;
+			border-radius: 8px;
+			margin-bottom: 4px;
+			font-size: 13px;
+			background: rgba(255, 255, 255, 0.04);
+		}
+
+		.recap-row .round-num {
+			font-weight: 700;
+			opacity: 0.6;
+			min-width: 60px;
+		}
+
+		.recap-row .winner-name {
+			font-weight: 700;
+			text-align: right;
+		}
+
+		/* Fedina Penale card */
+		.fedina-card {
+			background: linear-gradient(145deg, #1a1a2e, #0f3460);
+			border: 2px solid rgba(243, 156, 18, 0.4);
+			border-radius: 16px;
+			padding: 28px 24px;
+			margin-bottom: 16px;
+			text-align: center;
+			position: relative;
+			overflow: hidden;
+		}
+
+		.fedina-card::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 3px;
+			background: linear-gradient(90deg, #e74c3c, #f39c12, #e74c3c);
+		}
+
+		.fedina-header {
+			font-size: 10px;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+			opacity: 0.5;
+			margin-bottom: 4px;
+		}
+
+		.fedina-title {
+			font-size: 18px;
+			font-weight: 800;
+			margin-bottom: 20px;
+			background: linear-gradient(90deg, #e74c3c, #f39c12);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: transparent;
+			background-clip: text;
+		}
+
+		.fedina-vs {
+			display: flex;
+			justify-content: space-around;
+			align-items: center;
+			margin-bottom: 20px;
+			gap: 12px;
+		}
+
+		.fedina-player {
+			flex: 1;
+			text-align: center;
+		}
+
+		.fedina-player .fp-name {
+			font-size: 16px;
+			font-weight: 700;
+			margin-bottom: 4px;
+		}
+
+		.fedina-player .fp-score {
+			font-size: 32px;
+			font-weight: 800;
+		}
+
+		.fedina-player .fp-label {
+			font-size: 10px;
+			opacity: 0.5;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+
+		.fedina-verdict {
+			padding: 12px 16px;
+			border-radius: 10px;
+			font-weight: 700;
+			font-size: 14px;
+			margin-bottom: 12px;
+		}
+
+		.fedina-verdict.guilty {
+			background: rgba(231, 76, 60, 0.15);
+			border: 1px solid rgba(231, 76, 60, 0.3);
+			color: #e74c3c;
+		}
+
+		.fedina-verdict.draw {
+			background: rgba(243, 156, 18, 0.15);
+			border: 1px solid rgba(243, 156, 18, 0.3);
+			color: #f39c12;
+		}
+
+		.fedina-footer {
+			font-size: 10px;
+			opacity: 0.3;
+			margin-top: 12px;
+			letter-spacing: 1px;
+		}
+
+		.screenshot-hint {
+			font-size: 11px;
+			opacity: 0.4;
+			margin-bottom: 16px;
+			font-style: italic;
+		}
+
+		/* Penalty floating button */
+		.penalty-fab {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			width: 56px;
+			height: 56px;
+			border-radius: 50%;
+			background: linear-gradient(135deg, #f39c12, #e67e22);
+			border: none;
+			color: #fff;
+			font-size: 24px;
+			cursor: pointer;
+			box-shadow: 0 4px 16px rgba(243, 156, 18, 0.4);
+			transition: transform 0.15s;
+			z-index: 100;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			animation: fabEntry 0.4s ease 0.3s both;
+		}
+
+		.penalty-fab:active {
+			transform: scale(0.9);
+		}
+
+		/* Modal */
+		.modal-overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.7);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			z-index: 200;
+			padding: 16px;
+			animation: fadeIn 0.2s ease;
+		}
+
+		.modal {
+			background: #1a1a2e;
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			border-radius: 16px;
+			padding: 24px;
+			width: 100%;
+			max-width: 400px;
+			animation: modalPop 0.3s ease;
+		}
+
+		.modal h3 {
+			text-align: center;
+			margin-bottom: 16px;
+			font-size: 16px;
+		}
+
+		.modal .penalty-btn {
+			width: 100%;
+			padding: 14px;
+			margin-bottom: 8px;
+			border-radius: 10px;
+			border: 1px solid rgba(255, 255, 255, 0.15);
+			background: rgba(255, 255, 255, 0.06);
+			color: #fff;
+			font-size: 14px;
+			font-family: inherit;
+			cursor: pointer;
+			text-align: center;
+			transition: background 0.2s, transform 0.15s;
+		}
+
+		.modal .penalty-btn:hover {
+			background: rgba(255, 255, 255, 0.12);
+		}
+
+		.modal .penalty-btn:active {
+			transform: scale(0.97);
+		}
+
+		.modal .close-btn {
+			width: 100%;
+			padding: 12px;
+			margin-top: 8px;
+			border-radius: 10px;
+			border: none;
+			background: rgba(255, 255, 255, 0.08);
+			color: #fff;
+			font-size: 13px;
+			font-family: inherit;
+			cursor: pointer;
+			opacity: 0.6;
+		}
+
+		/* Toast */
+		.toast {
+			position: fixed;
+			top: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: linear-gradient(135deg, #f39c12, #e67e22);
+			color: #fff;
+			padding: 12px 24px;
+			border-radius: 12px;
+			font-size: 14px;
+			font-weight: 600;
+			z-index: 300;
+			box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+			animation: toastIn 0.3s ease, toastOut 0.3s ease 4.5s forwards;
+			text-align: center;
+			max-width: 90%;
+		}
+
+		/* ── Animations ── */
+		@keyframes shimmer {
+			0%, 100% { background-position: 0% 50%; }
+			50% { background-position: 100% 50%; }
+		}
+
+		@keyframes slideUp {
+			from { opacity: 0; transform: translateY(20px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		@keyframes fadeIn {
+			from { opacity: 0; }
+			to { opacity: 1; }
+		}
+
+		@keyframes scalePop {
+			0% { transform: scale(0.3); opacity: 0; }
+			60% { transform: scale(1.2); }
+			100% { transform: scale(1); opacity: 1; }
+		}
+
+		@keyframes gavelSmash {
+			0% { transform: rotate(-30deg) scale(0.5); opacity: 0; }
+			40% { transform: rotate(10deg) scale(1.3); }
+			60% { transform: rotate(-5deg) scale(1.1); }
+			100% { transform: rotate(0deg) scale(1); opacity: 1; }
+		}
+
+		@keyframes shakeText {
+			0%, 100% { transform: translateX(0); }
+			20% { transform: translateX(-6px); }
+			40% { transform: translateX(6px); }
+			60% { transform: translateX(-4px); }
+			80% { transform: translateX(4px); }
+		}
+
+		@keyframes scoreBump {
+			0% { transform: scale(1); }
+			40% { transform: scale(1.4); }
+			100% { transform: scale(1); }
+		}
+
+		@keyframes glowPulse {
+			0%, 100% { box-shadow: 0 0 8px rgba(243, 156, 18, 0.2); }
+			50% { box-shadow: 0 0 20px rgba(243, 156, 18, 0.4); }
+		}
+
+		@keyframes timerFlash {
+			0%, 100% { opacity: 1; }
+			50% { opacity: 0.3; }
+		}
+
+		@keyframes toastIn {
+			from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+			to { opacity: 1; transform: translateX(-50%) translateY(0); }
+		}
+
+		@keyframes toastOut {
+			from { opacity: 1; }
+			to { opacity: 0; }
+		}
+
+		@keyframes fabEntry {
+			from { transform: scale(0) rotate(-180deg); }
+			to { transform: scale(1) rotate(0); }
+		}
+
+		@keyframes modalPop {
+			from { transform: scale(0.85); opacity: 0; }
+			to { transform: scale(1); opacity: 1; }
+		}
+
+		@keyframes cardEntry {
+			from { opacity: 0; transform: translateY(16px) scale(0.97); }
+			to { opacity: 1; transform: translateY(0) scale(1); }
+		}
+
+		.fade-in {
+			animation: cardEntry 0.4s ease;
+		}
+
+		.actions {
+			display: flex;
+			gap: 12px;
+			flex-wrap: wrap;
+			justify-content: center;
+			margin-top: 16px;
 		}
 
 		.loading {
@@ -198,22 +929,11 @@
 			margin-top: 80px;
 			opacity: 0.6;
 			font-size: 18px;
+			animation: fadeIn 0.5s ease;
 		}
 
-		@keyframes fadeIn {
-			from {
-				opacity: 0;
-				transform: translateY(10px);
-			}
-
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		.fade-in {
-			animation: fadeIn 0.35s ease;
+		.hidden {
+			display: none !important;
 		}
 	</style>
 </head>
@@ -221,156 +941,962 @@
 <body>
 
 	<div id="app">
-		<div class="loading">⚖️ Caricamento accuse...</div>
+		<div class="loading">⚖️ Caricamento fascicoli processuali...</div>
 	</div>
 
 	<script>
+		// ── Data ──
 		let data = [];
-		let allPhrases = [];
-		let usedIndices = new Set();
-		let currentIndex = null;
-		let filterCat = null;
-		let showAll = false;
 
+		// ── Custom accusations ──
+		const CUSTOM_KEY = 'tribunale30_custom';
+		function loadCustom() {
+			try { return JSON.parse(localStorage.getItem(CUSTOM_KEY)) || []; } catch { return []; }
+		}
+		function saveCustom(list) {
+			localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
+		}
+
+		// ── Game state ──
+		let state = {
+			phase: 'setup',
+			p1Name: '',
+			p2Name: '',
+			totalRounds: 10,
+			currentRound: 0,
+			p1Score: 0,
+			p2Score: 0,
+			roundResults: [],
+			selectedCats: [],
+			availablePrompts: [],
+			usedIndices: [],
+			currentPrompt: null,
+			currentPromptCat: null,
+			timerEnabled: false,
+			timerSeconds: 60,
+			customOnly: false
+		};
+
+		// ── Timer ──
+		let timerInterval = null;
+		let timerRemaining = 0;
+
+		function startTimer() {
+			stopTimer();
+			timerRemaining = state.timerSeconds;
+			updateTimerDisplay();
+			timerInterval = setInterval(() => {
+				timerRemaining--;
+				updateTimerDisplay();
+				if (timerRemaining <= 0) {
+					stopTimer();
+					showToast('⏰ Tempo scaduto! La Corte intima di concludere immediatamente!');
+				}
+			}, 1000);
+		}
+
+		function stopTimer() {
+			if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+		}
+
+		function updateTimerDisplay() {
+			const el = document.getElementById('timerProgress');
+			const txt = document.getElementById('timerText');
+			if (!el || !txt) return;
+			const pct = timerRemaining / state.timerSeconds;
+			el.style.strokeDashoffset = 226 * (1 - pct);
+			txt.textContent = timerRemaining;
+			el.classList.remove('warning', 'danger', 'expired');
+			if (timerRemaining <= 0) el.classList.add('expired');
+			else if (pct <= 0.2) el.classList.add('danger');
+			else if (pct <= 0.4) el.classList.add('warning');
+		}
+
+		// ── LocalStorage ──
+		const STORAGE_KEY = 'tribunale30_state';
+
+		function saveState() {
+			localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+		}
+
+		function loadState() {
+			const saved = localStorage.getItem(STORAGE_KEY);
+			if (saved) {
+				try {
+					const parsed = JSON.parse(saved);
+					if (parsed && parsed.phase && parsed.phase !== 'setup') {
+						Object.assign(state, parsed);
+						return true;
+					}
+				} catch (e) { }
+			}
+			return false;
+		}
+
+		function resetState() {
+			stopTimer();
+			state = {
+				phase: 'setup',
+				p1Name: '',
+				p2Name: '',
+				totalRounds: 10,
+				currentRound: 0,
+				p1Score: 0,
+				p2Score: 0,
+				roundResults: [],
+				selectedCats: [],
+				availablePrompts: [],
+				usedIndices: [],
+				currentPrompt: null,
+				currentPromptCat: null,
+				timerEnabled: false,
+				timerSeconds: 60,
+				customOnly: false
+			};
+			localStorage.removeItem(STORAGE_KEY);
+		}
+
+		// ── Narration templates ──
+		const NARR = {
+			opening: [
+				(p1, p2) => `Si dichiara aperta la sessione straordinaria della Corte Suprema delle Figuracce, Sezione Crimini contro la Dignità Umana. In data odierna, dinanzi a questa Illustrissima Giuria popolare, sono chiamati a comparire i cittadini <strong>${p1}</strong> e <strong>${p2}</strong>, entrambi accusati di reati multipli contro il buon costume, il buon senso e la decenza pubblica. La Corte ricorda ai presenti che ogni tentativo di negare l'evidenza sarà punito con un sorso aggiuntivo. Il silenzio non è ammesso. La vergogna è obbligatoria. Si proceda con il primo capo d'accusa.`,
+				(p1, p2) => `Silenzio in aula! Con il potere conferitomi dal Codice Penale della Goliardia, articolo 30, comma "ormai è troppo tardi per tornare indietro", dichiaro aperto il procedimento a carico di <strong>${p1}</strong> e <strong>${p2}</strong>. I due imputati dovranno rispondere dei crimini più abietti mai commessi contro la propria reputazione. La Giuria è avvisata: ciò che sentirete stasera non potrà essere dissentito. Si prega di trattenere i conati di riso e di disgusto fino al termine di ogni arringa.`,
+				(p1, p2) => `Onorevoli membri della Giuria, stimati presenti e voi due disgraziati sul banco degli imputati — <strong>${p1}</strong> e <strong>${p2}</strong> — il Tribunale vi dà il benvenuto a questa udienza speciale. Siete qui perché avete compiuto 30 anni senza aver ancora sviluppato un senso della vergogna funzionante. Stasera la Corte stabilirà, una volta per tutte, chi tra voi due sia il peggiore. Il perdente beve. Il vincitore... anche, ma con più dignità. Si aprano i lavori.`,
+				(p1, p2) => `In nome del popolo goliardico, si apre il fascicolo penale n° 30/2026 a carico di <strong>${p1}</strong> e <strong>${p2}</strong>, imputati di aver attraversato tre decenni di vita lasciando dietro di sé una scia di figuracce, decisioni discutibili e aneddoti irripetibili. La Corte ha letto le memorie istruttorie e ne è rimasta profondamente turbata. La Giuria è pronta? Bene. Cominciamo questa discesa nel baratro della dignità umana.`,
+				(p1, p2) => `L'udienza ha inizio. Gli imputati <strong>${p1}</strong> e <strong>${p2}</strong> sono stati convocati con decreto d'urgenza, in quanto ritenuti una minaccia persistente per il decoro pubblico. La Corte avvisa che le testimonianze raccolte stasera potrebbero causare imbarazzo vicario nei presenti. Si consiglia un sorso preventivo a tutta la Giuria per prepararsi psicologicamente. Il Cancelliere apra il primo fascicolo.`,
+				(p1, p2) => `Attenzione, attenzione. Per ordine della Suprema Corte della Goliardia, sezione distaccata "Crimini Contro il Buon Gusto", si dà il via al processo più atteso dell'anno. Gli imputati <strong>${p1}</strong> e <strong>${p2}</strong> siederanno sul banco degli accusati, mentre questa Illustrissima Giuria deciderà chi tra i due meriti il titolo infamante di Colpevole Supremo. La sentenza è inappellabile, la bevuta obbligatoria. Si proceda.`
+			],
+			roundIntro: [
+				(n, tot) => `La Corte procede con il capo d'accusa numero ${n} su ${tot}. Si prega la Giuria di prestare la massima attenzione e il minimo rispetto.`,
+				(n, tot) => `Fascicolo ${n} di ${tot}. Il Cancelliere apra la busta sigillata. Ciò che segue potrebbe urtare la sensibilità dei presenti. La Corte se ne compiace.`,
+				(n, tot) => `Procedimento numero ${n} su ${tot}. La Corte invita gli imputati a prepararsi psicologicamente. Non che servirà a qualcosa.`,
+				(n, tot) => `Si passi all'udienza numero ${n} di ${tot}. La Corte ha già perso ogni speranza nell'umanità, ma procediamo comunque per dovere istituzionale.`,
+				(n, tot) => `Capo d'accusa ${n} di ${tot}. Il Tribunale ricorda che mentire sotto giuramento goliardico è punibile con sorso doppio. La verità, per quanto dolorosa, è l'unica via.`,
+				(n, tot) => `Atto ${n} di ${tot}. La Corte si è ripresa a malapena dall'udienza precedente. Si proceda, che tanto peggio di così non può andare. O forse sì.`,
+				(n, tot) => `Articolo ${n} su ${tot} del fascicolo processuale. La Corte si augura che gli imputati abbiano ancora un briciolo di dignità da perdere. Probabilmente no.`,
+				(n, tot) => `Il Cancelliere estragga il capo d'accusa numero ${n} di ${tot}. La Giuria affili le orecchie. Quello che sentirete non potrà essere rimosso dalla memoria.`,
+				(n, tot) => `Siamo all'udienza ${n} di ${tot}. La Corte nota che gli imputati sudano già. Ottimo segno. Significa che le accuse stanno colpendo nel segno.`,
+				(n, tot) => `Procedimento ${n} su ${tot}. A questo punto del processo, la Corte non si stupisce più di nulla. Ma vediamo se gli imputati riescono ancora a sorprenderci.`,
+				(n, tot) => `Fascicolo numero ${n} di ${tot}. La Corte invita i presenti a non filmare. O a filmare, tanto finirà comunque su un gruppo WhatsApp.`,
+				(n, tot) => `Capo d'accusa ${n} su ${tot}. Il Giudice ricorda alla Giuria che siamo qui per la giustizia, non per il divertimento. Anche se le due cose, stranamente, coincidono.`
+			],
+			callPlayer: [
+				(name) => `Ha la parola l'imputato <strong>${name}</strong>. La Corte ricorda che la confessione spontanea è apprezzata, ma non ridurrà la pena. Racconti pure la sua versione dei fatti, con dovizia di dettagli vergognosi.`,
+				(name) => `Si alzi l'imputato <strong>${name}</strong> e confessi i propri misfatti. La Corte consiglia vivamente di non omettere nulla: la Giuria fiuta le bugie.`,
+				(name) => `La parola passa a <strong>${name}</strong>. Il Tribunale si aspetta una confessione completa, circostanziata e preferibilmente imbarazzante. Prego, si accomodi nella propria vergogna.`,
+				(name) => `<strong>${name}</strong>, è il suo turno. La Corte le ricorda che il diritto al silenzio non è previsto in questa giurisdizione. Parli, e che sia memorabile.`,
+				(name) => `L'imputato <strong>${name}</strong> è chiamato a testimoniare contro se stesso. La Corte si metta comoda. Siamo tutti orecchie e giudizio.`,
+				(name) => `La Corte concede la parola a <strong>${name}</strong>. Si ricordi che la Giuria apprezza i dettagli: luoghi, orari, testimoni e livello di pentimento. O di assenza dello stesso.`,
+				(name) => `È il turno di <strong>${name}</strong>. La Corte lo avvisa che la Giuria ha già sentito cose indicibili, quindi non si trattenga. Il peggio che può succedere è una condanna. Che probabilmente arriverà comunque.`,
+				(name) => `L'imputato <strong>${name}</strong> prenda la parola. La Corte gli ricorda che stiamo giudicando chi ha fatto peggio, non chi racconta la storia migliore. Onestà brutale, prego.`,
+				(name) => `Si chiama a deporre <strong>${name}</strong>. La Corte nota il suo sguardo nervoso. È un buon segno: significa che ha qualcosa di succoso da raccontare.`,
+				(name) => `<strong>${name}</strong>, il microfono è suo. La Corte consiglia di guardare la Giuria negli occhi mentre confessa. L'imbarazzo fa parte della pena.`
+			],
+			callVote: [
+				`La Giuria è ora chiamata ad esprimersi! Chi tra i due imputati ha toccato il fondo più profondo? Si alzi la mano per il colpevole. La Corte conta.`,
+				`Onorevoli giurati, avete ascoltato entrambe le confessioni. È il momento della verità. Chi merita la condanna? La Giuria si esprima per alzata di mano.`,
+				`La Corte chiede alla Giuria di deliberare. Ricordate: non si giudica la persona, si giudica l'azione. Anzi no, si giudica anche la persona. Mani in alto.`,
+				`Silenzio in aula! La Giuria deliberi: chi ha fatto peggio? Chi ha raggiunto vette più alte di indegnità? Si voti ora, per alzata di mano.`,
+				`È giunto il momento del verdetto popolare. Stimata Giuria, alzate la mano per chi secondo voi merita la condanna. Il Giudice conta i voti e non accetta tangenti. Forse.`,
+				`La Corte si rivolge alla Giuria: avete udito entrambe le deposizioni. Ora esprimete il vostro insindacabile giudizio per alzata di mano. Chi ha raggiunto il fondo?`,
+				`Giurati, la delibera è nelle vostre mani. Letteralmente: alzatele. La Corte desidera un verdetto rapido, inequivocabile e possibilmente unanime. Ma ci accontentiamo della maggioranza.`,
+				`Attenzione, si procede alla votazione. La Giuria esprima il proprio voto per alzata di mano. La Corte ricorda che astenersi è da vigliacchi e che qui non si accettano vigliacchi.`,
+				`Il momento è solenne. La Giuria deve decidere: chi tra i due ha dimostrato una più completa e raffinata mancanza di dignità? Mani in alto per il colpevole.`,
+				`La Corte chiede alla Giuria di non lasciarsi influenzare da simpatie personali, amicizie o debiti pregressi. Votate con la coscienza. O con lo stomaco. Mani in alto.`
+			],
+			roundWin: [
+				(winner, loser) => `La Giuria ha parlato! <strong>${loser}</strong> è dichiarato COLPEVOLE per questo capo d'accusa. La condanna è immediata: un sorso di penitenza.`,
+				(winner, loser) => `Il verdetto è unanime... o quasi. <strong>${loser}</strong> si è distinto per la maggiore indegnità. La Corte lo condanna a bere.`,
+				(winner, loser) => `La Corte registra la sconfitta morale di <strong>${loser}</strong>. La pena è chiara: si beva, e si rifletta sulle proprie scelte di vita.`,
+				(winner, loser) => `Colpevole! <strong>${loser}</strong> ha perso questo round in modo netto. La Giuria non ha avuto dubbi. Si esegua la condanna: un sorso, con vergogna.`,
+				(winner, loser) => `La Corte prende atto della confessione di <strong>${loser}</strong> e la ritiene peggiore. La condanna è un sorso. <strong>${winner}</strong> se la cava. Per ora.`,
+				(winner, loser) => `Verdetto emesso! <strong>${loser}</strong> si è guadagnato una condanna per manifesta indegnità. Il sorso è obbligatorio e non ammette appello.`,
+				(winner, loser) => `La Giuria ha deliberato con velocità sospetta. <strong>${loser}</strong> è il colpevole di questo round. La pena: bere. Il movente: avere fatto peggio. La difesa: inesistente.`,
+				(winner, loser) => `Caso chiuso per questo capo d'accusa. <strong>${loser}</strong>, lei ha fatto peggio e la Giuria lo sa. Un sorso, prego. La dignità la recupererà un'altra volta.`
+			],
+			roundDraw: [
+				(p1, p2) => `La Giuria è spaccata! Entrambi gli imputati hanno dimostrato un livello di indegnità perfettamente equivalente. La Corte condanna <strong>${p1}</strong> e <strong>${p2}</strong> a bere entrambi. Nessuno è innocente qui.`,
+				(p1, p2) => `Pareggio! La Corte rileva con sgomento che entrambi gli imputati sono ugualmente colpevoli. Pena doppia: bevete entrambi. La giustizia è cieca, ma non sorda a queste storie.`,
+				(p1, p2) => `La Giuria non riesce a decidere, e onestamente la Corte capisce perché. <strong>${p1}</strong> e <strong>${p2}</strong> sono entrambi terribili. Bevete tutti e due, così imparerete. O più probabilmente no.`,
+				(p1, p2) => `Situazione di stallo! La Corte dichiara <strong>${p1}</strong> e <strong>${p2}</strong> equamente colpevoli. La sentenza: un sorso ciascuno. La vergogna: condivisa. L'umanità: perduta.`,
+				(p1, p2) => `Parità assoluta. La Giuria è divisa come il Mar Rosso, ma qui non si salva nessuno. <strong>${p1}</strong> e <strong>${p2}</strong>, bevete entrambi. La Corte non sa chi compatire di più.`,
+				(p1, p2) => `Un pareggio raro e meritato. Entrambi gli imputati hanno toccato il fondo con la stessa grazia. La Corte condanna <strong>${p1}</strong> e <strong>${p2}</strong> a un sorso simultaneo di solidarietà nella vergogna.`
+			],
+			finalWin: [
+				(winner, loser, wScore, lScore, tot) => `Dopo attenta e sofferta deliberazione, questa Corte dichiara <strong>${loser}</strong> COLPEVOLE SUPREMO di indegnità cronica, con ${lScore} condanne su ${tot} capi d'accusa. La sentenza è INAPPELLABILE. Il condannato è obbligato a bere DOPPIO come risarcimento morale per la Giuria che ha dovuto ascoltare tali nefandezze. <strong>${winner}</strong> è dichiarato "il meno peggio", il che non è esattamente un complimento. Si chiuda il fascicolo.`,
+				(winner, loser, wScore, lScore, tot) => `Il Tribunale, nella sua infinita saggezza, emette la sentenza finale: <strong>${loser}</strong> è riconosciuto colpevole con ${lScore} condanne su ${tot} capi d'accusa. Non si era visto un curriculum criminale così imbarazzante dai tempi del Medioevo. La pena: DOPPIO SORSO. <strong>${winner}</strong> se la cava con una fedina penale leggermente meno disastrosa. Caso chiuso.`,
+				(winner, loser, wScore, lScore, tot) => `La Corte Suprema delle Figuracce, riunita in camera di consiglio, pronuncia la seguente sentenza: <strong>${loser}</strong>, con ${lScore} condanne su ${tot}, è dichiarato il campione indiscusso dell'indegnità. La pena: DOPPIO SORSO e il disonore eterno. <strong>${winner}</strong> riceve una menzione d'onore per essere stato leggermente meno orribile. Congratulazioni, se così si possono chiamare.`,
+				(winner, loser, wScore, lScore, tot) => `In nome del popolo goliardico, la Corte dichiara chiuso il dibattimento. <strong>${loser}</strong>, con ${lScore} condanne su ${tot} capi d'accusa, è giudicato il peggiore. La condanna: BEVUTA DOPPIA, immediata e senza appello. <strong>${winner}</strong>, lei è libero di andare. Ma sappia che "meno colpevole" non significa "innocente". Si archivi il fascicolo con la dicitura "vergogna bilaterale".`,
+				(winner, loser, wScore, lScore, tot) => `Sentenza finale! Il fascicolo si chiude con <strong>${loser}</strong> condannato ${lScore} volte su ${tot}. Un record che resterà negli annali di questo Tribunale. La pena massima: DOPPIO SORSO. <strong>${winner}</strong>, con sole ${wScore} condanne, se la cava come il minore dei due mali. La Corte si congeda, profondamente segnata da questa esperienza.`
+			],
+			finalDraw: [
+				(p1, p2, score, tot) => `Caso senza precedenti nella storia della giurisprudenza goliardica! <strong>${p1}</strong> e <strong>${p2}</strong> hanno pareggiato con ${score} condanne ciascuno su ${tot} capi d'accusa. La Corte, incapace di stabilire chi sia il peggiore — perché siete ENTRAMBI terribili — condanna i due imputati a bere DOPPIO entrambi. La doppia condanna è la pena minima per un livello di indegnità così uniformemente distribuito. Si chiuda il fascicolo con disonore condiviso.`,
+				(p1, p2, score, tot) => `Incredibile! ${score} condanne a testa su ${tot} capi d'accusa. <strong>${p1}</strong> e <strong>${p2}</strong> sono perfettamente equivalenti nel loro essere terribili. La Corte non ha mai assistito a un pareggio così equilibrato nell'indegnità. La sentenza: DOPPIO SORSO per entrambi. Nessuno vince, tutti perdono, come nella vita.`,
+				(p1, p2, score, tot) => `La Corte è esterrefatta. Un pareggio perfetto: ${score} a ${score} su ${tot} round. <strong>${p1}</strong> e <strong>${p2}</strong>, siete due facce della stessa medaglia di vergogna. La condanna è DOPPIA per entrambi. Il Tribunale si ritira a meditare su cosa abbia sbagliato l'umanità per produrre due individui così simmetricamente indegni.`
+			],
+			penaltyTemplates: [
+				(name) => `⚖️ La Corte commina un SORSO DI PENALITÀ a ${name} per condotta inappropriata in aula!`,
+				(name) => `⚖️ OBIEZIONE RESPINTA! ${name} è condannato a un sorso penalità per oltraggio alla Corte!`,
+				(name) => `⚖️ Articolo 30-bis: ${name} beva immediatamente un sorso penalità per manifesta mancanza di decoro!`,
+				(name) => `⚖️ Il Giudice, nell'esercizio dei propri poteri, infligge un sorso penalità a ${name}!`,
+				(name) => `⚖️ La Corte sanziona ${name} con un sorso penalità per disturbo del procedimento giudiziario!`,
+				(name) => `⚖️ Per turbativa dell'ordine goliardico, ${name} è condannato a un sorso penalità con effetto immediato!`,
+				(name) => `⚖️ ${name} è richiamato all'ordine con un sorso penalità! La Corte non tollera insubordinazione!`,
+				(name) => `⚖️ Il Tribunale, con fermezza e un pizzico di sadismo, assegna un sorso penalità a ${name}!`
+			]
+		};
+
+		function pick(arr) {
+			return arr[Math.floor(Math.random() * arr.length)];
+		}
+
+		// ── Fetch data ──
 		fetch('data.json')
 			.then(r => r.json())
 			.then(json => {
 				data = json;
-				allPhrases = data.flatMap(cat => cat.phrases);
+				const restored = loadState();
+				if (!restored) {
+					state.selectedCats = data.map((_, i) => i);
+				}
 				render();
 			})
 			.catch(() => {
 				document.getElementById('app').innerHTML =
-					'<div class="loading">Errore nel caricamento di data.json</div>';
+					'<div class="loading">Errore nel caricamento dei fascicoli processuali.</div>';
 			});
 
-		function getCategoryForIndex(index) {
-			let count = 0;
-			for (const cat of data) {
-				if (index < count + cat.phrases.length) return cat;
-				count += cat.phrases.length;
+		// ── Prompt selection ──
+		function buildAvailablePrompts() {
+			state.availablePrompts = [];
+			const customs = loadCustom();
+			if (!state.customOnly) {
+				let globalIdx = 0;
+				data.forEach((cat, catIdx) => {
+					cat.prompts.forEach((prompt) => {
+						if (state.selectedCats.includes(catIdx)) {
+							state.availablePrompts.push({
+								index: globalIdx,
+								text: prompt,
+								category: cat.category,
+								icon: cat.icon,
+								color: cat.color
+							});
+						}
+						globalIdx++;
+					});
+				});
 			}
-			return null;
+			// Add custom accusations (always in mixed mode, exclusively in custom-only mode)
+			customs.forEach((text, i) => {
+				state.availablePrompts.push({
+					index: 10000 + i,
+					text: text,
+					category: 'Personalizzate',
+					icon: '🎯',
+					color: '#9b59b6'
+				});
+			});
 		}
 
-		function getCategoryRange(catIndex) {
-			let start = 0;
-			for (let i = 0; i < catIndex; i++) start += data[i].phrases.length;
-			return [start, start + data[catIndex].phrases.length - 1];
+		function drawPrompt() {
+			const available = state.availablePrompts.filter(
+				p => !state.usedIndices.includes(p.index)
+			);
+			if (available.length === 0) return null;
+			const chosen = pick(available);
+			state.usedIndices.push(chosen.index);
+			return chosen;
 		}
 
+		// ── Render ──
 		function render() {
+			stopTimer();
 			const app = document.getElementById('app');
-			app.innerHTML = showAll ? renderList() : renderGame();
+			let html = '';
+
+			switch (state.phase) {
+				case 'setup': html = renderSetup(); break;
+				case 'opening': html = renderOpening(); break;
+				case 'charge': html = renderCharge(); break;
+				case 'player1': html = renderPlayerTurn(1); break;
+				case 'player2': html = renderPlayerTurn(2); break;
+				case 'vote': html = renderVote(); break;
+				case 'result': html = renderResult(); break;
+				case 'final': html = renderFinal(); break;
+			}
+
+			app.innerHTML = html;
+
+			if (!['setup', 'opening', 'final'].includes(state.phase)) {
+				app.innerHTML += renderPenaltyFab();
+			}
+
 			bindEvents();
+
+			// Start timer on player turns
+			if (state.timerEnabled && (state.phase === 'player1' || state.phase === 'player2')) {
+				startTimer();
+			}
 		}
 
-		function renderGame() {
-			const cat = currentIndex !== null ? getCategoryForIndex(currentIndex) : null;
-			let total = allPhrases.length;
-			if (filterCat !== null) {
-				const [s, e] = getCategoryRange(filterCat);
-				total = e - s + 1;
-			}
+		// ── Setup ──
+		function renderSetup() {
+			const catFilters = data.map((cat, i) => {
+				const active = state.selectedCats.includes(i);
+				const style = active ? `background:${cat.color}33;border-color:${cat.color};color:${cat.color}` : '';
+				return `<div class="cat-filter ${active ? 'active' : ''}" data-cat="${i}" style="${style}">${cat.icon} ${cat.category}</div>`;
+			}).join('');
+
+			const roundOptions = Array.from({ length: 18 }, (_, i) => {
+				const n = i + 3;
+				return `<option value="${n}" ${n === 10 ? 'selected' : ''}>` +
+					`${n} capi d'accusa` +
+					`${n === 10 ? ' (consigliato)' : ''}` +
+					`</option>`;
+			}).join('');
+
+			const customs = loadCustom();
+			const customItems = customs.map((text, i) =>
+				`<div class="custom-item"><span>${text}</span><button data-del-custom="${i}">✕</button></div>`
+			).join('');
+
+			const timerOptions = [30, 45, 60, 90, 120].map(s =>
+				`<option value="${s}" ${s === 60 ? 'selected' : ''}>${s} secondi</option>`
+			).join('');
 
 			return `
-    <div class="header">
-      <div class="icon">⚖️</div>
-      <h1>IL PROCESSO DEI 30 ANNI</h1>
-      <p>${allPhrases.length} accuse goliardiche per i festeggiati</p>
-    </div>
-    <div class="filters">
-      <button class="${filterCat === null ? 'active' : ''}" data-filter="all">Tutte</button>
-      ${data.map((c, i) => `
-        <button class="${filterCat === i ? 'active' : ''}" data-filter="${i}"
-          style="${filterCat === i ? `background:${c.color}33;border-color:${c.color};color:${c.color}` : ''}">
-          ${c.icon} ${c.category}
-        </button>
-      `).join('')}
-    </div>
-    <div class="card" style="${cat ? `background:linear-gradient(145deg,${cat.color}15,${cat.color}08);border-color:${cat.color}40` : ''}">
-      ${currentIndex === null
-        ? `<p class="placeholder">Premi il bottone per estrarre un'accusa!</p>`
-        : `<div class="cat-label fade-in" style="color:${cat.color}">${cat.icon} ${cat.category} — Accusa #${currentIndex + 1}</div>
-           <p class="phrase fade-in">${allPhrases[currentIndex]}</p>`
-      }
-    </div>
-    <div class="actions">
-      <button class="btn-main" id="draw">🎲 Pesca un'accusa</button>
-      <button class="btn-sec" id="reset">🔄 Reset</button>
-      <button class="btn-sec" id="showAll">📜 Vedi tutte</button>
-    </div>
-    <p class="counter">Accuse estratte: ${usedIndices.size} / ${total}</p>
-  `;
+				<div class="header">
+					<div class="icon">⚖️</div>
+					<h1>IL TRIBUNALE DEI 30 ANNI</h1>
+					<p>Processo goliardico per stabilire chi è il peggiore</p>
+				</div>
+				<div class="container">
+					<div class="setup-card">
+						<h2>👤 Imputati</h2>
+						<div class="form-group">
+							<label>Nome Imputato 1</label>
+							<input type="text" id="p1name" placeholder="Nome del primo imputato" maxlength="20">
+						</div>
+						<div class="form-group">
+							<label>Nome Imputato 2</label>
+							<input type="text" id="p2name" placeholder="Nome del secondo imputato" maxlength="20">
+						</div>
+					</div>
+					<div class="setup-card">
+						<h2>📋 Configurazione Udienza</h2>
+						<div class="form-group">
+							<label>Numero di capi d'accusa</label>
+							<select id="rounds">${roundOptions}</select>
+						</div>
+						<div class="form-group">
+							<label>Categorie (clicca per attivare/disattivare)</label>
+							<div class="cat-filters">${catFilters}</div>
+						</div>
+						<div class="toggle-row">
+							<label style="font-size:13px;opacity:0.7">⏱️ Timer per le arringhe</label>
+							<label class="toggle">
+								<input type="checkbox" id="timerToggle">
+								<span class="toggle-slider"></span>
+							</label>
+						</div>
+						<div id="timerConfig" class="hidden">
+							<div class="form-group">
+								<label>Durata per arringa</label>
+								<select id="timerDuration">${timerOptions}</select>
+							</div>
+						</div>
+					</div>
+					<div class="setup-card">
+						<h2>🎯 Accuse Personalizzate</h2>
+						<p style="font-size:12px;opacity:0.5;margin-bottom:12px">Aggiungi capi d'accusa specifici per i festeggiati.</p>
+						<div class="custom-input-row">
+							<input type="text" id="customInput" placeholder="Es: Chi ha fatto peggio a..." maxlength="300">
+							<button id="addCustomBtn">+ Aggiungi</button>
+						</div>
+						${customs.length > 0 ? `
+							<div class="custom-count">${customs.length} accuse personalizzate</div>
+							<div class="custom-list">${customItems}</div>
+							<div class="toggle-row" style="margin-top:12px">
+								<label style="font-size:13px;opacity:0.7">🎯 Usa solo le personalizzate</label>
+								<label class="toggle">
+									<input type="checkbox" id="customOnlyToggle">
+									<span class="toggle-slider"></span>
+								</label>
+							</div>
+							<div id="customOnlyHint" class="hidden" style="font-size:11px;opacity:0.5;margin-top:4px">Le categorie standard verranno ignorate. Max ${customs.length} round.</div>
+						` : '<div class="custom-list"></div>'}
+					</div>
+					<button class="btn-main" id="startBtn" disabled>⚖️ Apri il Tribunale</button>
+				</div>
+			`;
 		}
 
-		function renderList() {
-			let globalIndex = 0;
+		// ── Opening ──
+		function renderOpening() {
+			const text = pick(NARR.opening)(state.p1Name, state.p2Name);
 			return `
-    <div class="list-view">
-      <button class="btn-sec" id="backToGame" style="margin-bottom:24px">← Torna al gioco</button>
-      <h2>📜 Tutte le ${allPhrases.length} Accuse</h2>
-      ${data.map(cat => {
-        const items = cat.phrases.map((p, i) => {
-          const idx = globalIndex++;
-          return `<div class="list-item ${usedIndices.has(idx) ? 'used' : ''}" style="border-left:3px solid ${cat.color}">
-            <span class="num" style="color:${cat.color}">#${idx + 1}</span>${p}
-          </div>`;
-        }).join('');
-        return ` < div class = "list-section" > < h3 style = "color:${cat.color}" > $ {
-				cat.icon
-			}
-			$ {
-				cat.category
-			} < /h3>${items}</div > `;
-      }).join('')}
-    </div>
-  `;
+				<div class="header">
+					<div class="icon" style="animation: scalePop 0.6s ease">⚖️</div>
+					<h1>IL TRIBUNALE DEI 30 ANNI</h1>
+				</div>
+				<div class="container">
+					<div class="game-card fade-in">
+						<div class="round-badge">Cerimonia di Apertura</div>
+						<div class="narration">
+							<div class="label">📜 Il Giudice legga ad alta voce</div>
+							${text}
+						</div>
+					</div>
+					<button class="btn-main" id="proceedBtn">⚖️ Si proceda con il primo capo d'accusa</button>
+				</div>
+			`;
 		}
 
-		function bindEvents() {
-			const drawBtn = document.getElementById('draw');
-			const resetBtn = document.getElementById('reset');
-			const showAllBtn = document.getElementById('showAll');
-			const backBtn = document.getElementById('backToGame');
+		// ── Charge ──
+		function renderCharge() {
+			const prompt = state.currentPrompt;
+			const introText = pick(NARR.roundIntro)(state.currentRound, state.totalRounds);
+			return `
+				<div class="container">
+					${renderScoreboard()}
+					<div class="game-card fade-in">
+						<div class="round-badge">Capo d'accusa ${state.currentRound} / ${state.totalRounds}</div>
+						<div class="narration">
+							<div class="label">📜 Il Giudice legga</div>
+							${introText}
+						</div>
+						<div class="charge-cat" style="color:${prompt.color}">${prompt.icon} ${prompt.category}</div>
+						<div class="charge-text">${prompt.text}</div>
+					</div>
+					<button class="btn-main" id="callP1Btn">🗣️ Chiamo l'imputato ${state.p1Name}</button>
+				</div>
+			`;
+		}
 
-			if (drawBtn) drawBtn.addEventListener('click', () => {
-				let available;
-				if (filterCat !== null) {
-					const [s, e] = getCategoryRange(filterCat);
-					available = [];
-					for (let i = s; i <= e; i++)
-						if (!usedIndices.has(i)) available.push(i);
-				} else {
-					available = allPhrases.map((_, i) => i).filter(i => !usedIndices.has(i));
+		// ── Player Turn ──
+		function renderPlayerTurn(playerNum) {
+			const name = playerNum === 1 ? state.p1Name : state.p2Name;
+			const callText = pick(NARR.callPlayer)(name);
+			const prompt = state.currentPrompt;
+			const nextLabel = playerNum === 1
+				? `🗣️ Chiamo l'imputato ${state.p2Name}`
+				: `🗳️ La Giuria si esprima!`;
+			const nextId = playerNum === 1 ? 'callP2Btn' : 'callVoteBtn';
+
+			const timerHtml = state.timerEnabled ? `
+				<div class="timer-container">
+					<div class="timer-circle">
+						<svg viewBox="0 0 80 80">
+							<circle class="bg" cx="40" cy="40" r="36"/>
+							<circle class="progress" id="timerProgress" cx="40" cy="40" r="36"/>
+						</svg>
+						<div class="timer-text" id="timerText">${state.timerSeconds}</div>
+					</div>
+				</div>` : '';
+
+			return `
+				<div class="container">
+					${renderScoreboard(playerNum)}
+					<div class="game-card fade-in">
+						<div class="round-badge">Capo d'accusa ${state.currentRound} / ${state.totalRounds}</div>
+						<div class="charge-cat" style="color:${prompt.color};font-size:10px;opacity:0.7">${prompt.icon} ${prompt.category}</div>
+						<div style="font-size:13px;opacity:0.6;margin-bottom:16px;line-height:1.5">${prompt.text}</div>
+						<div class="narration">
+							<div class="label">📜 Il Giudice legga</div>
+							${callText}
+						</div>
+						${timerHtml}
+					</div>
+					<button class="btn-main" id="${nextId}">${nextLabel}</button>
+				</div>
+			`;
+		}
+
+		// ── Vote ──
+		function renderVote() {
+			const voteText = pick(NARR.callVote);
+			return `
+				<div class="container">
+					${renderScoreboard()}
+					<div class="game-card fade-in">
+						<div class="round-badge">Verdetto — Round ${state.currentRound}</div>
+						<div class="narration">
+							<div class="label">📜 Il Giudice legga</div>
+							${voteText}
+						</div>
+						<p style="font-size:14px;opacity:0.7;margin:12px 0">Chi ha fatto peggio? Il Giudice selezioni il colpevole:</p>
+						<div class="vote-buttons">
+							<button class="btn-vote btn-vote-p1" data-vote="p1">👎 ${state.p1Name}</button>
+							<button class="btn-vote btn-vote-p2" data-vote="p2">👎 ${state.p2Name}</button>
+							<button class="btn-vote btn-vote-draw" data-vote="draw">⚖️ Pareggio — entrambi colpevoli</button>
+						</div>
+					</div>
+				</div>
+			`;
+		}
+
+		// ── Result ──
+		function renderResult() {
+			const lastResult = state.roundResults[state.roundResults.length - 1];
+			let icon, text, narration, penalty, verdictClass;
+
+			if (lastResult === 'draw') {
+				icon = '⚖️';
+				text = 'PAREGGIO!';
+				penalty = `${state.p1Name} e ${state.p2Name} bevono entrambi!`;
+				narration = pick(NARR.roundDraw)(state.p1Name, state.p2Name);
+				verdictClass = 'verdict-draw';
+			} else {
+				const loser = lastResult === 'p1' ? state.p1Name : state.p2Name;
+				const winner = lastResult === 'p1' ? state.p2Name : state.p1Name;
+				icon = '🔨';
+				text = `${loser} È COLPEVOLE!`;
+				penalty = `${loser} beve!`;
+				narration = pick(NARR.roundWin)(winner, loser);
+				verdictClass = 'verdict-guilty';
+			}
+
+			const isLast = state.currentRound >= state.totalRounds;
+			const nextLabel = isLast ? '📜 Sentenza Finale' : '➡️ Prossimo capo d\'accusa';
+
+			return `
+				<div class="container">
+					${renderScoreboard()}
+					<div class="game-card fade-in ${verdictClass}">
+						<div class="result-icon">${icon}</div>
+						<div class="result-text">${text}</div>
+						<div class="result-penalty">🍺 ${penalty}</div>
+						<div class="narration">
+							<div class="label">📜 Il Giudice legga</div>
+							${narration}
+						</div>
+					</div>
+					<button class="btn-main" id="nextRoundBtn">${nextLabel}</button>
+				</div>
+			`;
+		}
+
+		// ── Final ──
+		function renderFinal() {
+			const isDraw = state.p1Score === state.p2Score;
+			let narration;
+
+			if (isDraw) {
+				narration = pick(NARR.finalDraw)(state.p1Name, state.p2Name, state.p1Score, state.totalRounds);
+			} else {
+				const p1Loses = state.p1Score > state.p2Score;
+				const loser = p1Loses ? state.p1Name : state.p2Name;
+				const winner = p1Loses ? state.p2Name : state.p1Name;
+				const loserCondanne = Math.max(state.p1Score, state.p2Score);
+				const winnerCondanne = Math.min(state.p1Score, state.p2Score);
+				narration = pick(NARR.finalWin)(winner, loser, winnerCondanne, loserCondanne, state.totalRounds);
+			}
+
+			const recapRows = state.roundResults.map((res, i) => {
+				let guiltyLabel;
+				if (res === 'draw') guiltyLabel = '<span style="color:#f39c12">⚖️ Entrambi colpevoli</span>';
+				else if (res === 'p1') guiltyLabel = `<span style="color:#e74c3c">👎 Colpevole: <strong>${state.p1Name}</strong></span>`;
+				else guiltyLabel = `<span style="color:#3498db">👎 Colpevole: <strong>${state.p2Name}</strong></span>`;
+				return `<div class="recap-row">
+					<span class="round-num">Round ${i + 1}</span>
+					<span class="winner-name">${guiltyLabel}</span>
+				</div>`;
+			}).join('');
+
+			// Fedina Penale
+			const draws = state.roundResults.filter(r => r === 'draw').length;
+			let verdictText, verdictClass;
+			if (isDraw) {
+				verdictText = `⚖️ DOPPIA CONDANNA — Entrambi bevono doppio`;
+				verdictClass = 'draw';
+			} else {
+				const p1Loses = state.p1Score > state.p2Score;
+				const loserName = p1Loses ? state.p1Name : state.p2Name;
+				verdictText = `🔨 ${loserName.toUpperCase()} — COLPEVOLE SUPREMO — Beve doppio`;
+				verdictClass = 'guilty';
+			}
+
+			const dateStr = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+
+			return `
+				<div class="header">
+					<div class="icon" style="animation: gavelSmash 0.6s ease">🔨</div>
+					<h1>SENTENZA FINALE</h1>
+				</div>
+				<div class="container">
+					<div class="game-card fade-in">
+						<div class="narration">
+							<div class="label">📜 Il Giudice legga la sentenza</div>
+							${narration}
+						</div>
+					</div>
+					<div class="game-card fade-in">
+						<div style="font-size:14px;font-weight:700;margin-bottom:12px;opacity:0.7;text-transform:uppercase;letter-spacing:1px">Registro delle Condanne</div>
+						<div class="rounds-recap">${recapRows}</div>
+					</div>
+					<p class="screenshot-hint">📸 Fai uno screenshot della Fedina Penale qui sotto!</p>
+					<div class="fedina-card fade-in">
+						<div class="fedina-header">Corte Suprema delle Figuracce</div>
+						<div class="fedina-title">⚖️ FEDINA PENALE ⚖️</div>
+						<div class="fedina-vs">
+							<div class="fedina-player">
+								<div class="fp-name" style="color:#e74c3c">${state.p1Name}</div>
+								<div class="fp-score" style="color:#e74c3c">${state.p1Score}</div>
+								<div class="fp-label">condanne</div>
+							</div>
+							<div style="font-size:20px;font-weight:800;opacity:0.3">VS</div>
+							<div class="fedina-player">
+								<div class="fp-name" style="color:#3498db">${state.p2Name}</div>
+								<div class="fp-score" style="color:#3498db">${state.p2Score}</div>
+								<div class="fp-label">condanne</div>
+							</div>
+						</div>
+						${draws > 0 ? `<div style="font-size:11px;opacity:0.5;margin-bottom:8px">Pareggi: ${draws}</div>` : ''}
+						<div class="fedina-verdict ${verdictClass}">${verdictText}</div>
+						<div class="fedina-footer">Il Tribunale dei 30 Anni — ${dateStr}</div>
+					</div>
+					<div class="actions">
+						<button class="btn-main" id="newTrialBtn" style="flex:1">⚖️ Nuovo Processo</button>
+					</div>
+				</div>
+			`;
+		}
+
+		// ── Scoreboard ──
+		function renderScoreboard(activeTurn) {
+			return `
+				<div class="scoreboard">
+					<div class="score-player ${activeTurn === 1 ? 'active-turn' : ''}">
+						<div class="name" style="color:#e74c3c">${state.p1Name}</div>
+						<div class="points">${state.p1Score}</div>
+						<div class="score-label">condanne</div>
+					</div>
+					<div class="score-vs">VS</div>
+					<div class="score-player ${activeTurn === 2 ? 'active-turn' : ''}">
+						<div class="name" style="color:#3498db">${state.p2Name}</div>
+						<div class="points">${state.p2Score}</div>
+						<div class="score-label">condanne</div>
+					</div>
+				</div>
+			`;
+		}
+
+		// ── Penalty FAB ──
+		function renderPenaltyFab() {
+			return `<button class="penalty-fab" id="penaltyFab" title="Penalità">🔨</button>`;
+		}
+
+		function showPenaltyModal() {
+			const targets = [
+				state.p1Name,
+				state.p2Name,
+				'Il Giudice',
+				'Tutta la Giuria'
+			];
+
+			const buttons = targets.map(t =>
+				`<button class="penalty-btn" data-penalty-target="${t}">🍺 Sorso penalità a ${t}</button>`
+			).join('');
+
+			const modal = document.createElement('div');
+			modal.className = 'modal-overlay';
+			modal.id = 'penaltyModal';
+			modal.innerHTML = `
+				<div class="modal">
+					<h3>⚖️ Penalità della Corte</h3>
+					${buttons}
+					<hr style="border:none;border-top:1px solid rgba(255,255,255,0.1);margin:12px 0">
+					<button class="penalty-btn" id="resetFromModal" style="color:#e74c3c;border-color:rgba(231,76,60,0.3)">🔄 Annulla il processo (reset)</button>
+					<button class="close-btn" id="closePenalty">Chiudi</button>
+				</div>
+			`;
+			document.body.appendChild(modal);
+
+			modal.querySelector('#closePenalty').addEventListener('click', () => modal.remove());
+			modal.addEventListener('click', (e) => {
+				if (e.target === modal) modal.remove();
+			});
+
+			modal.querySelector('#resetFromModal').addEventListener('click', () => {
+				if (confirm('Sei sicuro? I fascicoli processuali verranno archiviati e la sessione verrà chiusa.')) {
+					modal.remove();
+					resetState();
+					state.selectedCats = data.map((_, i) => i);
+					render();
 				}
-				if (available.length === 0) return;
-				currentIndex = available[Math.floor(Math.random() * available.length)];
-				usedIndices.add(currentIndex);
-				render();
 			});
 
-			if (resetBtn) resetBtn.addEventListener('click', () => {
-				usedIndices = new Set();
-				currentIndex = null;
-				render();
-			});
-			if (showAllBtn) showAllBtn.addEventListener('click', () => {
-				showAll = true;
-				render();
-			});
-			if (backBtn) backBtn.addEventListener('click', () => {
-				showAll = false;
-				render();
-			});
-
-			document.querySelectorAll('[data-filter]').forEach(btn => {
+			modal.querySelectorAll('[data-penalty-target]').forEach(btn => {
 				btn.addEventListener('click', () => {
-					const val = btn.dataset.filter;
-					filterCat = val === 'all' ? null : parseInt(val);
+					const target = btn.dataset.penaltyTarget;
+					modal.remove();
+					showToast(pick(NARR.penaltyTemplates)(target));
+				});
+			});
+		}
+
+		function showToast(message) {
+			const existing = document.querySelector('.toast');
+			if (existing) existing.remove();
+
+			const toast = document.createElement('div');
+			toast.className = 'toast';
+			toast.innerHTML = message;
+			document.body.appendChild(toast);
+			setTimeout(() => toast.remove(), 5000);
+		}
+
+		// ── Events ──
+		function bindEvents() {
+			// Setup
+			const p1Input = document.getElementById('p1name');
+			const p2Input = document.getElementById('p2name');
+			const roundsSelect = document.getElementById('rounds');
+			const startBtn = document.getElementById('startBtn');
+			const timerToggle = document.getElementById('timerToggle');
+			const timerConfig = document.getElementById('timerConfig');
+
+			if (p1Input && p2Input) {
+				// Helper: save all form values, re-render, restore them
+				const reRenderSetup = () => {
+					const formState = {
+						p1: p1Input.value,
+						p2: p2Input.value,
+						rounds: roundsSelect ? roundsSelect.value : '10',
+						timer: timerToggle ? timerToggle.checked : false,
+						timerDur: document.getElementById('timerDuration')?.value || '60',
+						customOnly: document.getElementById('customOnlyToggle')?.checked || false
+					};
+					render();
+					const els = {
+						p1: document.getElementById('p1name'),
+						p2: document.getElementById('p2name'),
+						rounds: document.getElementById('rounds'),
+						timer: document.getElementById('timerToggle'),
+						timerDur: document.getElementById('timerDuration'),
+						timerCfg: document.getElementById('timerConfig'),
+						co: document.getElementById('customOnlyToggle'),
+						coHint: document.getElementById('customOnlyHint')
+					};
+					if (els.p1) els.p1.value = formState.p1;
+					if (els.p2) els.p2.value = formState.p2;
+					if (els.rounds) els.rounds.value = formState.rounds;
+					if (els.timer) {
+						els.timer.checked = formState.timer;
+						if (els.timerCfg) els.timerCfg.classList.toggle('hidden', !formState.timer);
+					}
+					if (els.timerDur) els.timerDur.value = formState.timerDur;
+					if (els.co) {
+						els.co.checked = formState.customOnly;
+						if (els.coHint) els.coHint.classList.toggle('hidden', !formState.customOnly);
+						document.querySelectorAll('.cat-filter').forEach(el => {
+							el.style.opacity = formState.customOnly ? '0.3' : '';
+							el.style.pointerEvents = formState.customOnly ? 'none' : '';
+						});
+					}
+				};
+
+				const validateSetup = () => {
+					const co = document.getElementById('customOnlyToggle');
+					const isCustomOnly = co && co.checked;
+					const customCount = loadCustom().length;
+					const hasNames = p1Input.value.trim() && p2Input.value.trim();
+					const hasCats = isCustomOnly ? customCount > 0 : state.selectedCats.length > 0;
+					const rounds = parseInt(roundsSelect.value);
+					const roundsOk = isCustomOnly ? rounds <= customCount : true;
+					if (startBtn) startBtn.disabled = !(hasNames && hasCats && roundsOk);
+				};
+				p1Input.addEventListener('input', validateSetup);
+				p2Input.addEventListener('input', validateSetup);
+				if (roundsSelect) roundsSelect.addEventListener('change', validateSetup);
+
+				// Timer toggle
+				if (timerToggle) {
+					timerToggle.addEventListener('change', () => {
+						timerConfig.classList.toggle('hidden', !timerToggle.checked);
+					});
+				}
+
+				// Custom-only toggle
+				const customOnlyToggle = document.getElementById('customOnlyToggle');
+				const customOnlyHint = document.getElementById('customOnlyHint');
+				if (customOnlyToggle) {
+					customOnlyToggle.addEventListener('change', () => {
+						const on = customOnlyToggle.checked;
+						if (customOnlyHint) customOnlyHint.classList.toggle('hidden', !on);
+						document.querySelectorAll('.cat-filter').forEach(el => {
+							el.style.opacity = on ? '0.3' : '';
+							el.style.pointerEvents = on ? 'none' : '';
+						});
+						validateSetup();
+					});
+				}
+
+				// Category filters
+				document.querySelectorAll('.cat-filter').forEach(el => {
+					el.addEventListener('click', () => {
+						const idx = parseInt(el.dataset.cat);
+						const pos = state.selectedCats.indexOf(idx);
+						if (pos >= 0) state.selectedCats.splice(pos, 1);
+						else state.selectedCats.push(idx);
+						reRenderSetup();
+						validateSetup();
+					});
+				});
+
+				// Custom accusations
+				const addBtn = document.getElementById('addCustomBtn');
+				const customInput = document.getElementById('customInput');
+				if (addBtn && customInput) {
+					const addCustom = () => {
+						const text = customInput.value.trim();
+						if (!text) return;
+						const customs = loadCustom();
+						customs.push(text);
+						saveCustom(customs);
+						reRenderSetup();
+						validateSetup();
+					};
+					addBtn.addEventListener('click', addCustom);
+					customInput.addEventListener('keydown', (e) => {
+						if (e.key === 'Enter') addCustom();
+					});
+				}
+
+				document.querySelectorAll('[data-del-custom]').forEach(btn => {
+					btn.addEventListener('click', () => {
+						const idx = parseInt(btn.dataset.delCustom);
+						const customs = loadCustom();
+						customs.splice(idx, 1);
+						saveCustom(customs);
+						reRenderSetup();
+						validateSetup();
+					});
+				});
+			}
+
+			if (startBtn) {
+				startBtn.addEventListener('click', () => {
+					state.p1Name = document.getElementById('p1name').value.trim();
+					state.p2Name = document.getElementById('p2name').value.trim();
+					state.totalRounds = parseInt(document.getElementById('rounds').value);
+					const tt = document.getElementById('timerToggle');
+					state.timerEnabled = tt ? tt.checked : false;
+					const td = document.getElementById('timerDuration');
+					state.timerSeconds = td ? parseInt(td.value) : 60;
+					const co = document.getElementById('customOnlyToggle');
+					state.customOnly = co ? co.checked : false;
+					buildAvailablePrompts();
+
+					if (state.availablePrompts.length < state.totalRounds) {
+						showToast(`⚠️ Solo ${state.availablePrompts.length} domande disponibili. Riduci i round o aggiungi categorie.`);
+						return;
+					}
+
+					state.phase = 'opening';
+					saveState();
+					render();
+				});
+			}
+
+			// Opening
+			const proceedBtn = document.getElementById('proceedBtn');
+			if (proceedBtn) {
+				proceedBtn.addEventListener('click', () => startNextRound());
+			}
+
+			// Charge → Player 1
+			const callP1Btn = document.getElementById('callP1Btn');
+			if (callP1Btn) {
+				callP1Btn.addEventListener('click', () => {
+					state.phase = 'player1';
+					saveState();
+					render();
+				});
+			}
+
+			// Player 1 → Player 2
+			const callP2Btn = document.getElementById('callP2Btn');
+			if (callP2Btn) {
+				callP2Btn.addEventListener('click', () => {
+					state.phase = 'player2';
+					saveState();
+					render();
+				});
+			}
+
+			// Player 2 → Vote
+			const callVoteBtn = document.getElementById('callVoteBtn');
+			if (callVoteBtn) {
+				callVoteBtn.addEventListener('click', () => {
+					state.phase = 'vote';
+					saveState();
+					render();
+				});
+			}
+
+			// Vote
+			document.querySelectorAll('[data-vote]').forEach(btn => {
+				btn.addEventListener('click', () => {
+					const vote = btn.dataset.vote;
+					state.roundResults.push(vote);
+					if (vote === 'p1') state.p1Score++;
+					else if (vote === 'p2') state.p2Score++;
+					state.phase = 'result';
+					saveState();
 					render();
 				});
 			});
+
+			// Next round / Final
+			const nextRoundBtn = document.getElementById('nextRoundBtn');
+			if (nextRoundBtn) {
+				nextRoundBtn.addEventListener('click', () => {
+					if (state.currentRound >= state.totalRounds) {
+						state.phase = 'final';
+						saveState();
+						render();
+					} else {
+						startNextRound();
+					}
+				});
+			}
+
+			// New trial
+			const newTrialBtn = document.getElementById('newTrialBtn');
+			if (newTrialBtn) {
+				newTrialBtn.addEventListener('click', () => {
+					if (confirm('Sei sicuro? I fascicoli processuali verranno archiviati e la sessione verrà chiusa.')) {
+						resetState();
+						state.selectedCats = data.map((_, i) => i);
+						render();
+					}
+				});
+			}
+
+			// Penalty FAB
+			const penaltyFab = document.getElementById('penaltyFab');
+			if (penaltyFab) {
+				penaltyFab.addEventListener('click', showPenaltyModal);
+			}
+		}
+
+		function startNextRound() {
+			state.currentRound++;
+			const prompt = drawPrompt();
+			if (!prompt) {
+				showToast('⚠️ Domande esaurite!');
+				state.phase = 'final';
+				saveState();
+				render();
+				return;
+			}
+			state.currentPrompt = prompt;
+			state.currentPromptCat = prompt.category;
+			state.phase = 'charge';
+			saveState();
+			render();
 		}
 	</script>
 </body>
