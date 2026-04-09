@@ -13,7 +13,7 @@ Un gioco goliardico e alcolico per feste di compleanno dei 30 anni. Il festeggia
 
 ## 🌐 Demo
 
-👉 [**Gioca ora**](https://alessandrocapelli.github.io/processo-dei-30-anni/)
+👉 [**Gioca ora**](https://alessandrocapelli.github.io/tribunale-dei-30/)
 
 ## 🗂️ Struttura
 
