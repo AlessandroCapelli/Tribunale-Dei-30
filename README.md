@@ -105,3 +105,9 @@ I capi d'accusa sono **puramente goliardici** e pensati per far ridere tra amici
 ## 📜 Licenza
 
 Fanne quello che vuoi. È una festa, non un tribunale (anche se il gioco dice il contrario).
+
+---
+
+<p align="center">
+  <img src="https://visitor-badge.laobi.icu/badge?page_id=alessandrocapelli.Tribunale-Dei-30" alt="Visitatori" />
+</p>
