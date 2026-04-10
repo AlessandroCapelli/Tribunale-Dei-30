@@ -1710,6 +1710,7 @@
 				p1Input.addEventListener('input', validateSetup);
 				p2Input.addEventListener('input', validateSetup);
 				if (roundsSelect) roundsSelect.addEventListener('change', validateSetup);
+				validateSetup();
 
 				// Timer toggle
 				if (timerToggle) {
