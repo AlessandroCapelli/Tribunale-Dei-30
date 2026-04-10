@@ -1701,11 +1701,15 @@
 					const co = document.getElementById('customOnlyToggle');
 					const isCustomOnly = co && co.checked;
 					const customCount = loadCustom().length;
-					const hasNames = p1Input.value.trim() && p2Input.value.trim();
+					const curP1 = document.getElementById('p1name');
+					const curP2 = document.getElementById('p2name');
+					const curRounds = document.getElementById('rounds');
+					const curBtn = document.getElementById('startBtn');
+					const hasNames = curP1 && curP1.value.trim() && curP2 && curP2.value.trim();
 					const hasCats = isCustomOnly ? customCount > 0 : state.selectedCats.length > 0;
-					const rounds = parseInt(roundsSelect.value);
+					const rounds = curRounds ? parseInt(curRounds.value) : 10;
 					const roundsOk = isCustomOnly ? rounds <= customCount : true;
-					if (startBtn) startBtn.disabled = !(hasNames && hasCats && roundsOk);
+					if (curBtn) curBtn.disabled = !(hasNames && hasCats && roundsOk);
 				};
 				p1Input.addEventListener('input', validateSetup);
 				p2Input.addEventListener('input', validateSetup);
