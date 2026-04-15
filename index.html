@@ -836,80 +836,191 @@
 
 		/* ── Animations ── */
 		@keyframes shimmer {
-			0%, 100% { background-position: 0% 50%; }
-			50% { background-position: 100% 50%; }
+
+			0%,
+			100% {
+				background-position: 0% 50%;
+			}
+
+			50% {
+				background-position: 100% 50%;
+			}
 		}
 
 		@keyframes slideUp {
-			from { opacity: 0; transform: translateY(20px); }
-			to { opacity: 1; transform: translateY(0); }
+			from {
+				opacity: 0;
+				transform: translateY(20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
 		}
 
 		@keyframes fadeIn {
-			from { opacity: 0; }
-			to { opacity: 1; }
+			from {
+				opacity: 0;
+			}
+
+			to {
+				opacity: 1;
+			}
 		}
 
 		@keyframes scalePop {
-			0% { transform: scale(0.3); opacity: 0; }
-			60% { transform: scale(1.2); }
-			100% { transform: scale(1); opacity: 1; }
+			0% {
+				transform: scale(0.3);
+				opacity: 0;
+			}
+
+			60% {
+				transform: scale(1.2);
+			}
+
+			100% {
+				transform: scale(1);
+				opacity: 1;
+			}
 		}
 
 		@keyframes gavelSmash {
-			0% { transform: rotate(-30deg) scale(0.5); opacity: 0; }
-			40% { transform: rotate(10deg) scale(1.3); }
-			60% { transform: rotate(-5deg) scale(1.1); }
-			100% { transform: rotate(0deg) scale(1); opacity: 1; }
+			0% {
+				transform: rotate(-30deg) scale(0.5);
+				opacity: 0;
+			}
+
+			40% {
+				transform: rotate(10deg) scale(1.3);
+			}
+
+			60% {
+				transform: rotate(-5deg) scale(1.1);
+			}
+
+			100% {
+				transform: rotate(0deg) scale(1);
+				opacity: 1;
+			}
 		}
 
 		@keyframes shakeText {
-			0%, 100% { transform: translateX(0); }
-			20% { transform: translateX(-6px); }
-			40% { transform: translateX(6px); }
-			60% { transform: translateX(-4px); }
-			80% { transform: translateX(4px); }
+
+			0%,
+			100% {
+				transform: translateX(0);
+			}
+
+			20% {
+				transform: translateX(-6px);
+			}
+
+			40% {
+				transform: translateX(6px);
+			}
+
+			60% {
+				transform: translateX(-4px);
+			}
+
+			80% {
+				transform: translateX(4px);
+			}
 		}
 
 		@keyframes scoreBump {
-			0% { transform: scale(1); }
-			40% { transform: scale(1.4); }
-			100% { transform: scale(1); }
+			0% {
+				transform: scale(1);
+			}
+
+			40% {
+				transform: scale(1.4);
+			}
+
+			100% {
+				transform: scale(1);
+			}
 		}
 
 		@keyframes glowPulse {
-			0%, 100% { box-shadow: 0 0 8px rgba(243, 156, 18, 0.2); }
-			50% { box-shadow: 0 0 20px rgba(243, 156, 18, 0.4); }
+
+			0%,
+			100% {
+				box-shadow: 0 0 8px rgba(243, 156, 18, 0.2);
+			}
+
+			50% {
+				box-shadow: 0 0 20px rgba(243, 156, 18, 0.4);
+			}
 		}
 
 		@keyframes timerFlash {
-			0%, 100% { opacity: 1; }
-			50% { opacity: 0.3; }
+
+			0%,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.3;
+			}
 		}
 
 		@keyframes toastIn {
-			from { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-			to { opacity: 1; transform: translateX(-50%) translateY(0); }
+			from {
+				opacity: 0;
+				transform: translateX(-50%) translateY(-20px);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateX(-50%) translateY(0);
+			}
 		}
 
 		@keyframes toastOut {
-			from { opacity: 1; }
-			to { opacity: 0; }
+			from {
+				opacity: 1;
+			}
+
+			to {
+				opacity: 0;
+			}
 		}
 
 		@keyframes fabEntry {
-			from { transform: scale(0) rotate(-180deg); }
-			to { transform: scale(1) rotate(0); }
+			from {
+				transform: scale(0) rotate(-180deg);
+			}
+
+			to {
+				transform: scale(1) rotate(0);
+			}
 		}
 
 		@keyframes modalPop {
-			from { transform: scale(0.85); opacity: 0; }
-			to { transform: scale(1); opacity: 1; }
+			from {
+				transform: scale(0.85);
+				opacity: 0;
+			}
+
+			to {
+				transform: scale(1);
+				opacity: 1;
+			}
 		}
 
 		@keyframes cardEntry {
-			from { opacity: 0; transform: translateY(16px) scale(0.97); }
-			to { opacity: 1; transform: translateY(0) scale(1); }
+			from {
+				opacity: 0;
+				transform: translateY(16px) scale(0.97);
+			}
+
+			to {
+				opacity: 1;
+				transform: translateY(0) scale(1);
+			}
 		}
 
 		.fade-in {
@@ -950,9 +1061,15 @@
 
 		// ── Custom accusations ──
 		const CUSTOM_KEY = 'tribunale30_custom';
+
 		function loadCustom() {
-			try { return JSON.parse(localStorage.getItem(CUSTOM_KEY)) || []; } catch { return []; }
+			try {
+				return JSON.parse(localStorage.getItem(CUSTOM_KEY)) || [];
+			} catch {
+				return [];
+			}
 		}
+
 		function saveCustom(list) {
 			localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
 		}
@@ -964,14 +1081,14 @@
 			rounds: 8,
 			timerSeconds: 60,
 			accuse: [
-				"Gli imputati Cume e Steve confessino il peggior episodio in cui si sono sentiti ufficialmente vecchi. La Corte vuole sapere luogo, contesto e chi li ha umiliati per primo con la frase «tu sì che hai la tua età».",
-				"La Corte domanda a Cume e Steve quale sia stata la più patetica crisi esistenziale legata all'arrivo dei 30 anni. Si accettano insonnie, liste di buoni propositi e fughe improvvise.",
-				"Gli imputati rendano conto della peggior figura fatta provando a comportarsi come ventenni dopo aver passato i 30. La Corte include serate sbagliate, outfit discutibili e hangover di tre giorni.",
-				"Si chiede a Cume e Steve di rivelare l'obiettivo di vita più imbarazzante che si erano prefissati entro i 30 anni e che hanno clamorosamente mancato. La Corte vuole la lista completa.",
-				"La Corte domanda agli imputati quale sia stato il commento più devastante ricevuto dai parenti durante un pranzo di famiglia riguardo al non essere ancora sposati, sistemati o genitori.",
-				"Gli imputati confessino il peggior acquisto da trentenne in crisi: auto, moto, attrezzi sportivi mai usati, abbonamenti in palestra o corsi di crescita personale. La Corte vuole l'importo speso.",
-				"Si chiede a Cume e Steve di raccontare il momento più imbarazzante in cui hanno dovuto ammettere di non capire più un riferimento culturale dei più giovani. La Corte include social, musica e slang.",
-				"La Corte domanda agli imputati quale sia stato il peggior bilancio fatto sulla propria vita alla vigilia dei 30 anni. Si accettano pianti, promesse non mantenute e confronti con gli amici."
+				"Gli imputati Cume e Steve confessino l'episodio in cui hanno spezzato il cuore a qualcuno nel modo più vigliacco. La Corte vuole sapere il nome della vittima, le modalità dell'esecuzione e se è mai stato chiesto perdono.",
+				"Si chiede a Cume e Steve di raccontare la volta più imbarazzante in cui hanno dovuto ammettere «sono troppo vecchio per questo». La Corte esige luogo, contesto e il nome di chi li ha umiliati con la frase «tu sì che hai la tua età».",
+				"Si chiede a Cume e Steve di rivelare l'oggetto più assurdo sottratto in stato di alterazione a un locale, a un amico o a uno sconosciuto. La Corte include insegne, bicchieri, sedie e coni stradali.",
+				"Gli imputati Cume e Steve confessino il video o la foto più compromettente che ancora oggi circola di loro in un gruppo WhatsApp. La Corte vuole sapere chi ha fatto lo screenshot e quante volte è stato rinoltrato.",
+				"Gli imputati Cume e Steve sono chiamati a rispondere dell'uso di sostanze stupefacenti nelle circostanze meno opportune della propria carriera. La Corte vuole sapere cosa, dove, e con quali conseguenze immediate.",
+				"La Corte domanda a Cume e Steve di confessare la situazione più assurda in cui si sono ritrovati a defecare o urinare in luogo pubblico. Si accettano vicoli, giardini condominiali, ascensori e mezzi di trasporto, nonché l'oggetto utilizzato per la pulizia (eventuale).",
+				"La Corte domanda agli imputati quale sia stato il bilancio più impietoso fatto sulla propria vita alla vigilia dei 30 anni. Si accettano pianti notturni, promesse non mantenute e confronti intimi con gli amici.",
+				"Per scagionarsi entrambi, Cume e Steve sono condannati a esibirsi immediatamente in un duetto di «Vivo per Lei», dividendosi le due voci. La Corte giudicherà intonazione, impegno e disperazione. Se la giuria è propensa, anche la partecipazione del Giudice è ammessa."
 			]
 		};
 
@@ -1015,7 +1132,10 @@
 		}
 
 		function stopTimer() {
-			if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+			if (timerInterval) {
+				clearInterval(timerInterval);
+				timerInterval = null;
+			}
 		}
 
 		function updateTimerDisplay() {
@@ -1047,7 +1167,7 @@
 						Object.assign(state, parsed);
 						return true;
 					}
-				} catch (e) { }
+				} catch (e) {}
 			}
 			return false;
 		}
@@ -1079,38 +1199,66 @@
 		// ── Narration templates ──
 		const NARR = {
 			opening: [
-				(p1, p2) => `Si dichiara aperta la sessione straordinaria della Corte Suprema delle Figuracce, Sezione Crimini contro la Dignità Umana. In data odierna, dinanzi a questa Illustrissima Giuria popolare, sono chiamati a comparire i cittadini <strong>${p1}</strong> e <strong>${p2}</strong>, entrambi accusati di reati multipli contro il buon costume, il buon senso e la decenza pubblica. La Corte ricorda ai presenti che ogni tentativo di negare l'evidenza sarà punito con un sorso aggiuntivo. Il silenzio non è ammesso. La vergogna è obbligatoria. Si proceda con il primo capo d'accusa.`,
-				(p1, p2) => `Silenzio in aula! Con il potere conferitomi dal Codice Penale della Goliardia, articolo 30, comma "ormai è troppo tardi per tornare indietro", dichiaro aperto il procedimento a carico di <strong>${p1}</strong> e <strong>${p2}</strong>. I due imputati dovranno rispondere dei crimini più abietti mai commessi contro la propria reputazione. La Giuria è avvisata: ciò che sentirete stasera non potrà essere dissentito. Si prega di trattenere i conati di riso e di disgusto fino al termine di ogni arringa.`,
-				(p1, p2) => `Onorevoli membri della Giuria, stimati presenti e voi due disgraziati sul banco degli imputati — <strong>${p1}</strong> e <strong>${p2}</strong> — il Tribunale vi dà il benvenuto a questa udienza speciale. Siete qui perché avete compiuto 30 anni senza aver ancora sviluppato un senso della vergogna funzionante. Stasera la Corte stabilirà, una volta per tutte, chi tra voi due sia il peggiore. Il perdente beve. Il vincitore... anche, ma con più dignità. Si aprano i lavori.`,
-				(p1, p2) => `In nome del popolo goliardico, si apre il fascicolo penale n° 30/2026 a carico di <strong>${p1}</strong> e <strong>${p2}</strong>, imputati di aver attraversato tre decenni di vita lasciando dietro di sé una scia di figuracce, decisioni discutibili e aneddoti irripetibili. La Corte ha letto le memorie istruttorie e ne è rimasta profondamente turbata. La Giuria è pronta? Bene. Cominciamo questa discesa nel baratro della dignità umana.`,
-				(p1, p2) => `L'udienza ha inizio. Gli imputati <strong>${p1}</strong> e <strong>${p2}</strong> sono stati convocati con decreto d'urgenza, in quanto ritenuti una minaccia persistente per il decoro pubblico. La Corte avvisa che le testimonianze raccolte stasera potrebbero causare imbarazzo vicario nei presenti. Si consiglia un sorso preventivo a tutta la Giuria per prepararsi psicologicamente. Il Cancelliere apra il primo fascicolo.`,
-				(p1, p2) => `Attenzione, attenzione. Per ordine della Suprema Corte della Goliardia, sezione distaccata "Crimini Contro il Buon Gusto", si dà il via al processo più atteso dell'anno. Gli imputati <strong>${p1}</strong> e <strong>${p2}</strong> siederanno sul banco degli accusati, mentre questa Illustrissima Giuria deciderà chi tra i due meriti il titolo infamante di Colpevole Supremo. La sentenza è inappellabile, la bevuta obbligatoria. Si proceda.`
+				(p1, p2) =>
+				`Si dichiara aperta la sessione straordinaria della Corte Suprema delle Figuracce, Sezione Crimini contro la Dignità Umana. In data odierna, dinanzi a questa Illustrissima Giuria popolare, sono chiamati a comparire i cittadini <strong>${p1}</strong> e <strong>${p2}</strong>, entrambi accusati di reati multipli contro il buon costume, il buon senso e la decenza pubblica. La Corte ricorda ai presenti che ogni tentativo di negare l'evidenza sarà punito con un sorso aggiuntivo. Il silenzio non è ammesso. La vergogna è obbligatoria. Si proceda con il primo capo d'accusa.`,
+				(p1, p2) =>
+				`Silenzio in aula! Con il potere conferitomi dal Codice Penale della Goliardia, articolo 30, comma "ormai è troppo tardi per tornare indietro", dichiaro aperto il procedimento a carico di <strong>${p1}</strong> e <strong>${p2}</strong>. I due imputati dovranno rispondere dei crimini più abietti mai commessi contro la propria reputazione. La Giuria è avvisata: ciò che sentirete stasera non potrà essere dissentito. Si prega di trattenere i conati di riso e di disgusto fino al termine di ogni arringa.`,
+				(p1, p2) =>
+				`Onorevoli membri della Giuria, stimati presenti e voi due disgraziati sul banco degli imputati — <strong>${p1}</strong> e <strong>${p2}</strong> — il Tribunale vi dà il benvenuto a questa udienza speciale. Siete qui perché avete compiuto 30 anni senza aver ancora sviluppato un senso della vergogna funzionante. Stasera la Corte stabilirà, una volta per tutte, chi tra voi due sia il peggiore. Il perdente beve. Il vincitore... anche, ma con più dignità. Si aprano i lavori.`,
+				(p1, p2) =>
+				`In nome del popolo goliardico, si apre il fascicolo penale n° 30/2026 a carico di <strong>${p1}</strong> e <strong>${p2}</strong>, imputati di aver attraversato tre decenni di vita lasciando dietro di sé una scia di figuracce, decisioni discutibili e aneddoti irripetibili. La Corte ha letto le memorie istruttorie e ne è rimasta profondamente turbata. La Giuria è pronta? Bene. Cominciamo questa discesa nel baratro della dignità umana.`,
+				(p1, p2) =>
+				`L'udienza ha inizio. Gli imputati <strong>${p1}</strong> e <strong>${p2}</strong> sono stati convocati con decreto d'urgenza, in quanto ritenuti una minaccia persistente per il decoro pubblico. La Corte avvisa che le testimonianze raccolte stasera potrebbero causare imbarazzo vicario nei presenti. Si consiglia un sorso preventivo a tutta la Giuria per prepararsi psicologicamente. Il Cancelliere apra il primo fascicolo.`,
+				(p1, p2) =>
+				`Attenzione, attenzione. Per ordine della Suprema Corte della Goliardia, sezione distaccata "Crimini Contro il Buon Gusto", si dà il via al processo più atteso dell'anno. Gli imputati <strong>${p1}</strong> e <strong>${p2}</strong> siederanno sul banco degli accusati, mentre questa Illustrissima Giuria deciderà chi tra i due meriti il titolo infamante di Colpevole Supremo. La sentenza è inappellabile, la bevuta obbligatoria. Si proceda.`
 			],
 			roundIntro: [
-				(n, tot) => `La Corte procede con il capo d'accusa numero ${n} su ${tot}. Si prega la Giuria di prestare la massima attenzione e il minimo rispetto.`,
-				(n, tot) => `Fascicolo ${n} di ${tot}. Il Cancelliere apra la busta sigillata. Ciò che segue potrebbe urtare la sensibilità dei presenti. La Corte se ne compiace.`,
-				(n, tot) => `Procedimento numero ${n} su ${tot}. La Corte invita gli imputati a prepararsi psicologicamente. Non che servirà a qualcosa.`,
-				(n, tot) => `Si passi all'udienza numero ${n} di ${tot}. La Corte ha già perso ogni speranza nell'umanità, ma procediamo comunque per dovere istituzionale.`,
-				(n, tot) => `Capo d'accusa ${n} di ${tot}. Il Tribunale ricorda che mentire sotto giuramento goliardico è punibile con sorso doppio. La verità, per quanto dolorosa, è l'unica via.`,
-				(n, tot) => `Atto ${n} di ${tot}. La Corte si è ripresa a malapena dall'udienza precedente. Si proceda, che tanto peggio di così non può andare. O forse sì.`,
-				(n, tot) => `Articolo ${n} su ${tot} del fascicolo processuale. La Corte si augura che gli imputati abbiano ancora un briciolo di dignità da perdere. Probabilmente no.`,
-				(n, tot) => `Il Cancelliere estragga il capo d'accusa numero ${n} di ${tot}. La Giuria affili le orecchie. Quello che sentirete non potrà essere rimosso dalla memoria.`,
-				(n, tot) => `Siamo all'udienza ${n} di ${tot}. La Corte nota che gli imputati sudano già. Ottimo segno. Significa che le accuse stanno colpendo nel segno.`,
-				(n, tot) => `Procedimento ${n} su ${tot}. A questo punto del processo, la Corte non si stupisce più di nulla. Ma vediamo se gli imputati riescono ancora a sorprenderci.`,
-				(n, tot) => `Fascicolo numero ${n} di ${tot}. La Corte invita i presenti a non filmare. O a filmare, tanto finirà comunque su un gruppo WhatsApp.`,
-				(n, tot) => `Capo d'accusa ${n} su ${tot}. Il Giudice ricorda alla Giuria che siamo qui per la giustizia, non per il divertimento. Anche se le due cose, stranamente, coincidono.`
+				(n, tot) =>
+				`La Corte procede con il capo d'accusa numero ${n} su ${tot}. Si prega la Giuria di prestare la massima attenzione e il minimo rispetto.`,
+				(n, tot) =>
+				`Fascicolo ${n} di ${tot}. Il Cancelliere apra la busta sigillata. Ciò che segue potrebbe urtare la sensibilità dei presenti. La Corte se ne compiace.`,
+				(n, tot) =>
+				`Procedimento numero ${n} su ${tot}. La Corte invita gli imputati a prepararsi psicologicamente. Non che servirà a qualcosa.`,
+				(n, tot) =>
+				`Si passi all'udienza numero ${n} di ${tot}. La Corte ha già perso ogni speranza nell'umanità, ma procediamo comunque per dovere istituzionale.`,
+				(n, tot) =>
+				`Capo d'accusa ${n} di ${tot}. Il Tribunale ricorda che mentire sotto giuramento goliardico è punibile con sorso doppio. La verità, per quanto dolorosa, è l'unica via.`,
+				(n, tot) =>
+				`Atto ${n} di ${tot}. La Corte si è ripresa a malapena dall'udienza precedente. Si proceda, che tanto peggio di così non può andare. O forse sì.`,
+				(n, tot) =>
+				`Articolo ${n} su ${tot} del fascicolo processuale. La Corte si augura che gli imputati abbiano ancora un briciolo di dignità da perdere. Probabilmente no.`,
+				(n, tot) =>
+				`Il Cancelliere estragga il capo d'accusa numero ${n} di ${tot}. La Giuria affili le orecchie. Quello che sentirete non potrà essere rimosso dalla memoria.`,
+				(n, tot) =>
+				`Siamo all'udienza ${n} di ${tot}. La Corte nota che gli imputati sudano già. Ottimo segno. Significa che le accuse stanno colpendo nel segno.`,
+				(n, tot) =>
+				`Procedimento ${n} su ${tot}. A questo punto del processo, la Corte non si stupisce più di nulla. Ma vediamo se gli imputati riescono ancora a sorprenderci.`,
+				(n, tot) =>
+				`Fascicolo numero ${n} di ${tot}. La Corte invita i presenti a non filmare. O a filmare, tanto finirà comunque su un gruppo WhatsApp.`,
+				(n, tot) =>
+				`Capo d'accusa ${n} su ${tot}. Il Giudice ricorda alla Giuria che siamo qui per la giustizia, non per il divertimento. Anche se le due cose, stranamente, coincidono.`
 			],
 			callPlayer: [
-				(name) => `Ha la parola l'imputato <strong>${name}</strong>. La Corte ricorda che la confessione spontanea è apprezzata, ma non ridurrà la pena. Racconti pure la sua versione dei fatti, con dovizia di dettagli vergognosi.`,
-				(name) => `Si alzi l'imputato <strong>${name}</strong> e confessi i propri misfatti. La Corte consiglia vivamente di non omettere nulla: la Giuria fiuta le bugie.`,
-				(name) => `La parola passa a <strong>${name}</strong>. Il Tribunale si aspetta una confessione completa, circostanziata e preferibilmente imbarazzante. Prego, si accomodi nella propria vergogna.`,
-				(name) => `<strong>${name}</strong>, è il suo turno. La Corte le ricorda che il diritto al silenzio non è previsto in questa giurisdizione. Parli, e che sia memorabile.`,
-				(name) => `L'imputato <strong>${name}</strong> è chiamato a testimoniare contro se stesso. La Corte si metta comoda. Siamo tutti orecchie e giudizio.`,
-				(name) => `La Corte concede la parola a <strong>${name}</strong>. Si ricordi che la Giuria apprezza i dettagli: luoghi, orari, testimoni e livello di pentimento. O di assenza dello stesso.`,
-				(name) => `È il turno di <strong>${name}</strong>. La Corte lo avvisa che la Giuria ha già sentito cose indicibili, quindi non si trattenga. Il peggio che può succedere è una condanna. Che probabilmente arriverà comunque.`,
-				(name) => `L'imputato <strong>${name}</strong> prenda la parola. La Corte gli ricorda che stiamo giudicando chi ha fatto peggio, non chi racconta la storia migliore. Onestà brutale, prego.`,
-				(name) => `Si chiama a deporre <strong>${name}</strong>. La Corte nota il suo sguardo nervoso. È un buon segno: significa che ha qualcosa di succoso da raccontare.`,
-				(name) => `<strong>${name}</strong>, il microfono è suo. La Corte consiglia di guardare la Giuria negli occhi mentre confessa. L'imbarazzo fa parte della pena.`
+				(name) =>
+				`Ha la parola l'imputato <strong>${name}</strong>. La Corte ricorda che la confessione spontanea è apprezzata, ma non ridurrà la pena. Racconti pure la sua versione dei fatti, con dovizia di dettagli vergognosi.`,
+				(name) =>
+				`Si alzi l'imputato <strong>${name}</strong> e confessi i propri misfatti. La Corte consiglia vivamente di non omettere nulla: la Giuria fiuta le bugie.`,
+				(name) =>
+				`La parola passa a <strong>${name}</strong>. Il Tribunale si aspetta una confessione completa, circostanziata e preferibilmente imbarazzante. Prego, si accomodi nella propria vergogna.`,
+				(name) =>
+				`<strong>${name}</strong>, è il suo turno. La Corte le ricorda che il diritto al silenzio non è previsto in questa giurisdizione. Parli, e che sia memorabile.`,
+				(name) =>
+				`L'imputato <strong>${name}</strong> è chiamato a testimoniare contro se stesso. La Corte si metta comoda. Siamo tutti orecchie e giudizio.`,
+				(name) =>
+				`La Corte concede la parola a <strong>${name}</strong>. Si ricordi che la Giuria apprezza i dettagli: luoghi, orari, testimoni e livello di pentimento. O di assenza dello stesso.`,
+				(name) =>
+				`È il turno di <strong>${name}</strong>. La Corte lo avvisa che la Giuria ha già sentito cose indicibili, quindi non si trattenga. Il peggio che può succedere è una condanna. Che probabilmente arriverà comunque.`,
+				(name) =>
+				`L'imputato <strong>${name}</strong> prenda la parola. La Corte gli ricorda che stiamo giudicando chi ha fatto peggio, non chi racconta la storia migliore. Onestà brutale, prego.`,
+				(name) =>
+				`Si chiama a deporre <strong>${name}</strong>. La Corte nota il suo sguardo nervoso. È un buon segno: significa che ha qualcosa di succoso da raccontare.`,
+				(name) =>
+				`<strong>${name}</strong>, il microfono è suo. La Corte consiglia di guardare la Giuria negli occhi mentre confessa. L'imbarazzo fa parte della pena.`
 			],
 			callVote: [
 				`La Giuria è ora chiamata ad esprimersi! Chi tra i due imputati ha toccato il fondo più profondo? Si alzi la mano per il colpevole. La Corte conta.`,
@@ -1125,44 +1273,71 @@
 				`La Corte chiede alla Giuria di non lasciarsi influenzare da simpatie personali, amicizie o debiti pregressi. Votate con la coscienza. O con lo stomaco. Mani in alto.`
 			],
 			roundWin: [
-				(winner, loser) => `La Giuria ha parlato! <strong>${loser}</strong> è dichiarato COLPEVOLE per questo capo d'accusa. La condanna è immediata: un sorso di penitenza.`,
-				(winner, loser) => `Il verdetto è unanime... o quasi. <strong>${loser}</strong> si è distinto per la maggiore indegnità. La Corte lo condanna a bere.`,
-				(winner, loser) => `La Corte registra la sconfitta morale di <strong>${loser}</strong>. La pena è chiara: si beva, e si rifletta sulle proprie scelte di vita.`,
-				(winner, loser) => `Colpevole! <strong>${loser}</strong> ha perso questo round in modo netto. La Giuria non ha avuto dubbi. Si esegua la condanna: un sorso, con vergogna.`,
-				(winner, loser) => `La Corte prende atto della confessione di <strong>${loser}</strong> e la ritiene peggiore. La condanna è un sorso. <strong>${winner}</strong> se la cava. Per ora.`,
-				(winner, loser) => `Verdetto emesso! <strong>${loser}</strong> si è guadagnato una condanna per manifesta indegnità. Il sorso è obbligatorio e non ammette appello.`,
-				(winner, loser) => `La Giuria ha deliberato con velocità sospetta. <strong>${loser}</strong> è il colpevole di questo round. La pena: bere. Il movente: avere fatto peggio. La difesa: inesistente.`,
-				(winner, loser) => `Caso chiuso per questo capo d'accusa. <strong>${loser}</strong>, lei ha fatto peggio e la Giuria lo sa. Un sorso, prego. La dignità la recupererà un'altra volta.`
+				(winner, loser) =>
+				`La Giuria ha parlato! <strong>${loser}</strong> è dichiarato COLPEVOLE per questo capo d'accusa. La condanna è immediata: un sorso di penitenza.`,
+				(winner, loser) =>
+				`Il verdetto è unanime... o quasi. <strong>${loser}</strong> si è distinto per la maggiore indegnità. La Corte lo condanna a bere.`,
+				(winner, loser) =>
+				`La Corte registra la sconfitta morale di <strong>${loser}</strong>. La pena è chiara: si beva, e si rifletta sulle proprie scelte di vita.`,
+				(winner, loser) =>
+				`Colpevole! <strong>${loser}</strong> ha perso questo round in modo netto. La Giuria non ha avuto dubbi. Si esegua la condanna: un sorso, con vergogna.`,
+				(winner, loser) =>
+				`La Corte prende atto della confessione di <strong>${loser}</strong> e la ritiene peggiore. La condanna è un sorso. <strong>${winner}</strong> se la cava. Per ora.`,
+				(winner, loser) =>
+				`Verdetto emesso! <strong>${loser}</strong> si è guadagnato una condanna per manifesta indegnità. Il sorso è obbligatorio e non ammette appello.`,
+				(winner, loser) =>
+				`La Giuria ha deliberato con velocità sospetta. <strong>${loser}</strong> è il colpevole di questo round. La pena: bere. Il movente: avere fatto peggio. La difesa: inesistente.`,
+				(winner, loser) =>
+				`Caso chiuso per questo capo d'accusa. <strong>${loser}</strong>, lei ha fatto peggio e la Giuria lo sa. Un sorso, prego. La dignità la recupererà un'altra volta.`
 			],
 			roundDraw: [
-				(p1, p2) => `La Giuria è spaccata! Entrambi gli imputati hanno dimostrato un livello di indegnità perfettamente equivalente. La Corte condanna <strong>${p1}</strong> e <strong>${p2}</strong> a bere entrambi. Nessuno è innocente qui.`,
-				(p1, p2) => `Pareggio! La Corte rileva con sgomento che entrambi gli imputati sono ugualmente colpevoli. Pena doppia: bevete entrambi. La giustizia è cieca, ma non sorda a queste storie.`,
-				(p1, p2) => `La Giuria non riesce a decidere, e onestamente la Corte capisce perché. <strong>${p1}</strong> e <strong>${p2}</strong> sono entrambi terribili. Bevete tutti e due, così imparerete. O più probabilmente no.`,
-				(p1, p2) => `Situazione di stallo! La Corte dichiara <strong>${p1}</strong> e <strong>${p2}</strong> equamente colpevoli. La sentenza: un sorso ciascuno. La vergogna: condivisa. L'umanità: perduta.`,
-				(p1, p2) => `Parità assoluta. La Giuria è divisa come il Mar Rosso, ma qui non si salva nessuno. <strong>${p1}</strong> e <strong>${p2}</strong>, bevete entrambi. La Corte non sa chi compatire di più.`,
-				(p1, p2) => `Un pareggio raro e meritato. Entrambi gli imputati hanno toccato il fondo con la stessa grazia. La Corte condanna <strong>${p1}</strong> e <strong>${p2}</strong> a un sorso simultaneo di solidarietà nella vergogna.`
+				(p1, p2) =>
+				`La Giuria è spaccata! Entrambi gli imputati hanno dimostrato un livello di indegnità perfettamente equivalente. La Corte condanna <strong>${p1}</strong> e <strong>${p2}</strong> a bere entrambi. Nessuno è innocente qui.`,
+				(p1, p2) =>
+				`Pareggio! La Corte rileva con sgomento che entrambi gli imputati sono ugualmente colpevoli. Pena doppia: bevete entrambi. La giustizia è cieca, ma non sorda a queste storie.`,
+				(p1, p2) =>
+				`La Giuria non riesce a decidere, e onestamente la Corte capisce perché. <strong>${p1}</strong> e <strong>${p2}</strong> sono entrambi terribili. Bevete tutti e due, così imparerete. O più probabilmente no.`,
+				(p1, p2) =>
+				`Situazione di stallo! La Corte dichiara <strong>${p1}</strong> e <strong>${p2}</strong> equamente colpevoli. La sentenza: un sorso ciascuno. La vergogna: condivisa. L'umanità: perduta.`,
+				(p1, p2) =>
+				`Parità assoluta. La Giuria è divisa come il Mar Rosso, ma qui non si salva nessuno. <strong>${p1}</strong> e <strong>${p2}</strong>, bevete entrambi. La Corte non sa chi compatire di più.`,
+				(p1, p2) =>
+				`Un pareggio raro e meritato. Entrambi gli imputati hanno toccato il fondo con la stessa grazia. La Corte condanna <strong>${p1}</strong> e <strong>${p2}</strong> a un sorso simultaneo di solidarietà nella vergogna.`
 			],
 			finalWin: [
-				(winner, loser, wScore, lScore, tot) => `Dopo attenta e sofferta deliberazione, questa Corte dichiara <strong>${loser}</strong> COLPEVOLE SUPREMO di indegnità cronica, con ${lScore} condanne su ${tot} capi d'accusa. La sentenza è INAPPELLABILE. Il condannato è obbligato a bere DOPPIO come risarcimento morale per la Giuria che ha dovuto ascoltare tali nefandezze. <strong>${winner}</strong> è dichiarato "il meno peggio", il che non è esattamente un complimento. Si chiuda il fascicolo.`,
-				(winner, loser, wScore, lScore, tot) => `Il Tribunale, nella sua infinita saggezza, emette la sentenza finale: <strong>${loser}</strong> è riconosciuto colpevole con ${lScore} condanne su ${tot} capi d'accusa. Non si era visto un curriculum criminale così imbarazzante dai tempi del Medioevo. La pena: DOPPIO SORSO. <strong>${winner}</strong> se la cava con una fedina penale leggermente meno disastrosa. Caso chiuso.`,
-				(winner, loser, wScore, lScore, tot) => `La Corte Suprema delle Figuracce, riunita in camera di consiglio, pronuncia la seguente sentenza: <strong>${loser}</strong>, con ${lScore} condanne su ${tot}, è dichiarato il campione indiscusso dell'indegnità. La pena: DOPPIO SORSO e il disonore eterno. <strong>${winner}</strong> riceve una menzione d'onore per essere stato leggermente meno orribile. Congratulazioni, se così si possono chiamare.`,
-				(winner, loser, wScore, lScore, tot) => `In nome del popolo goliardico, la Corte dichiara chiuso il dibattimento. <strong>${loser}</strong>, con ${lScore} condanne su ${tot} capi d'accusa, è giudicato il peggiore. La condanna: BEVUTA DOPPIA, immediata e senza appello. <strong>${winner}</strong>, lei è libero di andare. Ma sappia che "meno colpevole" non significa "innocente". Si archivi il fascicolo con la dicitura "vergogna bilaterale".`,
-				(winner, loser, wScore, lScore, tot) => `Sentenza finale! Il fascicolo si chiude con <strong>${loser}</strong> condannato ${lScore} volte su ${tot}. Un record che resterà negli annali di questo Tribunale. La pena massima: DOPPIO SORSO. <strong>${winner}</strong>, con sole ${wScore} condanne, se la cava come il minore dei due mali. La Corte si congeda, profondamente segnata da questa esperienza.`
+				(winner, loser, wScore, lScore, tot) =>
+				`Dopo attenta e sofferta deliberazione, questa Corte dichiara <strong>${loser}</strong> COLPEVOLE SUPREMO di indegnità cronica, con ${lScore} condanne su ${tot} capi d'accusa. La sentenza è INAPPELLABILE. Il condannato è obbligato a bere DOPPIO come risarcimento morale per la Giuria che ha dovuto ascoltare tali nefandezze. <strong>${winner}</strong> è dichiarato "il meno peggio", il che non è esattamente un complimento. Si chiuda il fascicolo.`,
+				(winner, loser, wScore, lScore, tot) =>
+				`Il Tribunale, nella sua infinita saggezza, emette la sentenza finale: <strong>${loser}</strong> è riconosciuto colpevole con ${lScore} condanne su ${tot} capi d'accusa. Non si era visto un curriculum criminale così imbarazzante dai tempi del Medioevo. La pena: DOPPIO SORSO. <strong>${winner}</strong> se la cava con una fedina penale leggermente meno disastrosa. Caso chiuso.`,
+				(winner, loser, wScore, lScore, tot) =>
+				`La Corte Suprema delle Figuracce, riunita in camera di consiglio, pronuncia la seguente sentenza: <strong>${loser}</strong>, con ${lScore} condanne su ${tot}, è dichiarato il campione indiscusso dell'indegnità. La pena: DOPPIO SORSO e il disonore eterno. <strong>${winner}</strong> riceve una menzione d'onore per essere stato leggermente meno orribile. Congratulazioni, se così si possono chiamare.`,
+				(winner, loser, wScore, lScore, tot) =>
+				`In nome del popolo goliardico, la Corte dichiara chiuso il dibattimento. <strong>${loser}</strong>, con ${lScore} condanne su ${tot} capi d'accusa, è giudicato il peggiore. La condanna: BEVUTA DOPPIA, immediata e senza appello. <strong>${winner}</strong>, lei è libero di andare. Ma sappia che "meno colpevole" non significa "innocente". Si archivi il fascicolo con la dicitura "vergogna bilaterale".`,
+				(winner, loser, wScore, lScore, tot) =>
+				`Sentenza finale! Il fascicolo si chiude con <strong>${loser}</strong> condannato ${lScore} volte su ${tot}. Un record che resterà negli annali di questo Tribunale. La pena massima: DOPPIO SORSO. <strong>${winner}</strong>, con sole ${wScore} condanne, se la cava come il minore dei due mali. La Corte si congeda, profondamente segnata da questa esperienza.`
 			],
 			finalDraw: [
-				(p1, p2, score, tot) => `Caso senza precedenti nella storia della giurisprudenza goliardica! <strong>${p1}</strong> e <strong>${p2}</strong> hanno pareggiato con ${score} condanne ciascuno su ${tot} capi d'accusa. La Corte, incapace di stabilire chi sia il peggiore — perché siete ENTRAMBI terribili — condanna i due imputati a bere DOPPIO entrambi. La doppia condanna è la pena minima per un livello di indegnità così uniformemente distribuito. Si chiuda il fascicolo con disonore condiviso.`,
-				(p1, p2, score, tot) => `Incredibile! ${score} condanne a testa su ${tot} capi d'accusa. <strong>${p1}</strong> e <strong>${p2}</strong> sono perfettamente equivalenti nel loro essere terribili. La Corte non ha mai assistito a un pareggio così equilibrato nell'indegnità. La sentenza: DOPPIO SORSO per entrambi. Nessuno vince, tutti perdono, come nella vita.`,
-				(p1, p2, score, tot) => `La Corte è esterrefatta. Un pareggio perfetto: ${score} a ${score} su ${tot} round. <strong>${p1}</strong> e <strong>${p2}</strong>, siete due facce della stessa medaglia di vergogna. La condanna è DOPPIA per entrambi. Il Tribunale si ritira a meditare su cosa abbia sbagliato l'umanità per produrre due individui così simmetricamente indegni.`
+				(p1, p2, score, tot) =>
+				`Caso senza precedenti nella storia della giurisprudenza goliardica! <strong>${p1}</strong> e <strong>${p2}</strong> hanno pareggiato con ${score} condanne ciascuno su ${tot} capi d'accusa. La Corte, incapace di stabilire chi sia il peggiore — perché siete ENTRAMBI terribili — condanna i due imputati a bere DOPPIO entrambi. La doppia condanna è la pena minima per un livello di indegnità così uniformemente distribuito. Si chiuda il fascicolo con disonore condiviso.`,
+				(p1, p2, score, tot) =>
+				`Incredibile! ${score} condanne a testa su ${tot} capi d'accusa. <strong>${p1}</strong> e <strong>${p2}</strong> sono perfettamente equivalenti nel loro essere terribili. La Corte non ha mai assistito a un pareggio così equilibrato nell'indegnità. La sentenza: DOPPIO SORSO per entrambi. Nessuno vince, tutti perdono, come nella vita.`,
+				(p1, p2, score, tot) =>
+				`La Corte è esterrefatta. Un pareggio perfetto: ${score} a ${score} su ${tot} round. <strong>${p1}</strong> e <strong>${p2}</strong>, siete due facce della stessa medaglia di vergogna. La condanna è DOPPIA per entrambi. Il Tribunale si ritira a meditare su cosa abbia sbagliato l'umanità per produrre due individui così simmetricamente indegni.`
 			],
 			penaltyTemplates: [
 				(name) => `⚖️ La Corte commina un SORSO DI PENALITÀ a ${name} per condotta inappropriata in aula!`,
 				(name) => `⚖️ OBIEZIONE RESPINTA! ${name} è condannato a un sorso penalità per oltraggio alla Corte!`,
-				(name) => `⚖️ Articolo 30-bis: ${name} beva immediatamente un sorso penalità per manifesta mancanza di decoro!`,
+				(name) =>
+				`⚖️ Articolo 30-bis: ${name} beva immediatamente un sorso penalità per manifesta mancanza di decoro!`,
 				(name) => `⚖️ Il Giudice, nell'esercizio dei propri poteri, infligge un sorso penalità a ${name}!`,
-				(name) => `⚖️ La Corte sanziona ${name} con un sorso penalità per disturbo del procedimento giudiziario!`,
-				(name) => `⚖️ Per turbativa dell'ordine goliardico, ${name} è condannato a un sorso penalità con effetto immediato!`,
-				(name) => `⚖️ ${name} è richiamato all'ordine con un sorso penalità! La Corte non tollera insubordinazione!`,
-				(name) => `⚖️ Il Tribunale, con fermezza e un pizzico di sadismo, assegna un sorso penalità a ${name}!`
+				(name) =>
+				`⚖️ La Corte sanziona ${name} con un sorso penalità per disturbo del procedimento giudiziario!`,
+				(name) =>
+				`⚖️ Per turbativa dell'ordine goliardico, ${name} è condannato a un sorso penalità con effetto immediato!`,
+				(name) =>
+				`⚖️ ${name} è richiamato all'ordine con un sorso penalità! La Corte non tollera insubordinazione!`,
+				(name) =>
+				`⚖️ Il Tribunale, con fermezza e un pizzico di sadismo, assegna un sorso penalità a ${name}!`
 			]
 		};
 
@@ -1248,14 +1423,30 @@
 			let html = '';
 
 			switch (state.phase) {
-				case 'setup': html = renderSetup(); break;
-				case 'opening': html = renderOpening(); break;
-				case 'charge': html = renderCharge(); break;
-				case 'player1': html = renderPlayerTurn(1); break;
-				case 'player2': html = renderPlayerTurn(2); break;
-				case 'vote': html = renderVote(); break;
-				case 'result': html = renderResult(); break;
-				case 'final': html = renderFinal(); break;
+				case 'setup':
+					html = renderSetup();
+					break;
+				case 'opening':
+					html = renderOpening();
+					break;
+				case 'charge':
+					html = renderCharge();
+					break;
+				case 'player1':
+					html = renderPlayerTurn(1);
+					break;
+				case 'player2':
+					html = renderPlayerTurn(2);
+					break;
+				case 'vote':
+					html = renderVote();
+					break;
+				case 'result':
+					html = renderResult();
+					break;
+				case 'final':
+					html = renderFinal();
+					break;
 			}
 
 			app.innerHTML = html;
@@ -1280,7 +1471,9 @@
 				return `<div class="cat-filter ${active ? 'active' : ''}" data-cat="${i}" style="${style}">${cat.icon} ${cat.category}</div>`;
 			}).join('');
 
-			const roundOptions = Array.from({ length: 18 }, (_, i) => {
+			const roundOptions = Array.from({
+				length: 18
+			}, (_, i) => {
 				const n = i + 3;
 				return `<option value="${n}" ${n === 10 ? 'selected' : ''}>` +
 					`${n} capi d'accusa` +
@@ -1421,9 +1614,9 @@
 			const name = playerNum === 1 ? state.p1Name : state.p2Name;
 			const callText = pick(NARR.callPlayer)(name);
 			const prompt = state.currentPrompt;
-			const nextLabel = playerNum === 1
-				? `🗣️ Chiamo l'imputato ${state.p2Name}`
-				: `🗳️ La Giuria si esprima!`;
+			const nextLabel = playerNum === 1 ?
+				`🗣️ Chiamo l'imputato ${state.p2Name}` :
+				`🗳️ La Giuria si esprima!`;
 			const nextId = playerNum === 1 ? 'callP2Btn' : 'callVoteBtn';
 
 			const timerHtml = state.timerEnabled ? `
@@ -1538,8 +1731,10 @@
 			const recapRows = state.roundResults.map((res, i) => {
 				let guiltyLabel;
 				if (res === 'draw') guiltyLabel = '<span style="color:#f39c12">⚖️ Entrambi colpevoli</span>';
-				else if (res === 'p1') guiltyLabel = `<span style="color:#e74c3c">👎 Colpevole: <strong>${state.p1Name}</strong></span>`;
-				else guiltyLabel = `<span style="color:#3498db">👎 Colpevole: <strong>${state.p2Name}</strong></span>`;
+				else if (res === 'p1') guiltyLabel =
+					`<span style="color:#e74c3c">👎 Colpevole: <strong>${state.p1Name}</strong></span>`;
+				else guiltyLabel =
+					`<span style="color:#3498db">👎 Colpevole: <strong>${state.p2Name}</strong></span>`;
 				return `<div class="recap-row">
 					<span class="round-num">Round ${i + 1}</span>
 					<span class="winner-name">${guiltyLabel}</span>
@@ -1559,7 +1754,11 @@
 				verdictClass = 'guilty';
 			}
 
-			const dateStr = new Date().toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+			const dateStr = new Date().toLocaleDateString('it-IT', {
+				day: 'numeric',
+				month: 'long',
+				year: 'numeric'
+			});
 
 			return `
 				<div class="header">
@@ -1880,7 +2079,9 @@
 					buildAvailablePrompts();
 
 					if (state.availablePrompts.length < state.totalRounds) {
-						showToast(`⚠️ Solo ${state.availablePrompts.length} domande disponibili. Riduci i round o aggiungi categorie.`);
+						showToast(
+							`⚠️ Solo ${state.availablePrompts.length} domande disponibili. Riduci i round o aggiungi categorie.`
+						);
 						return;
 					}
 
@@ -1957,7 +2158,8 @@
 			const newTrialBtn = document.getElementById('newTrialBtn');
 			if (newTrialBtn) {
 				newTrialBtn.addEventListener('click', () => {
-					if (confirm('Sei sicuro? I fascicoli processuali verranno archiviati e la sessione verrà chiusa.')) {
+					if (confirm(
+							'Sei sicuro? I fascicoli processuali verranno archiviati e la sessione verrà chiusa.')) {
 						resetState();
 						state.selectedCats = data.map((_, i) => i);
 						render();
