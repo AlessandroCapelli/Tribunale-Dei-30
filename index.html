@@ -957,21 +957,21 @@
 			localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
 		}
 
-		// ── Preset: Laurea Cume e Steve ──
-		const LAUREA_PRESET = {
+		// ── Preset: Trentesimo di Cume e Steve ──
+		const TRENTESIMO_PRESET = {
 			p1: 'Cume',
 			p2: 'Steve',
 			rounds: 8,
 			timerSeconds: 60,
 			accuse: [
-				"Gli imputati Cume e Steve confessino il peggior episodio di procrastinazione prima di un esame universitario. La Corte vuole sapere quante serie Netflix sono state finite al posto dello studio.",
-				"La Corte domanda a Cume e Steve quale sia stata la sessione d'esami più catastrofica della loro carriera accademica. Si accettano fallimenti multipli, crisi in segreteria e piani di studio rifatti da capo.",
-				"Gli imputati rendano conto della peggior figura fatta davanti a un professore durante un esame orale. La Corte include lapsus, silenzi imbarazzanti e tentativi di supplica per un voto in più.",
-				"Si chiede a Cume e Steve di rivelare la bugia più grande detta ai genitori riguardo al percorso universitario. La Corte vuole sapere per quanti anni è stata sostenuta prima di crollare.",
-				"La Corte domanda agli imputati quale sia stato il tentativo più patetico di copiare durante un esame scritto. Si accettano bigliettini creativi, sguardi furtivi e app nascoste sotto il banco.",
-				"Gli imputati confessino il peggior episodio avvenuto durante una nottata di studio disperato prima di un esame. La Corte include crolli psicologici, litri di Red Bull e pianti silenziosi in biblioteca.",
-				"Si chiede a Cume e Steve di raccontare la più imbarazzante presentazione di gruppo della loro carriera accademica. La Corte vuole sapere chi ha realmente lavorato e chi ha solo messo il nome.",
-				"La Corte domanda agli imputati quale sia stato il momento di panico più assurdo durante la scrittura della tesi. Si accettano crisi alle 4 del mattino, file persi e relatori irreperibili."
+				"Gli imputati Cume e Steve confessino il peggior episodio in cui si sono sentiti ufficialmente vecchi. La Corte vuole sapere luogo, contesto e chi li ha umiliati per primo con la frase «tu sì che hai la tua età».",
+				"La Corte domanda a Cume e Steve quale sia stata la più patetica crisi esistenziale legata all'arrivo dei 30 anni. Si accettano insonnie, liste di buoni propositi e fughe improvvise.",
+				"Gli imputati rendano conto della peggior figura fatta provando a comportarsi come ventenni dopo aver passato i 30. La Corte include serate sbagliate, outfit discutibili e hangover di tre giorni.",
+				"Si chiede a Cume e Steve di rivelare l'obiettivo di vita più imbarazzante che si erano prefissati entro i 30 anni e che hanno clamorosamente mancato. La Corte vuole la lista completa.",
+				"La Corte domanda agli imputati quale sia stato il commento più devastante ricevuto dai parenti durante un pranzo di famiglia riguardo al non essere ancora sposati, sistemati o genitori.",
+				"Gli imputati confessino il peggior acquisto da trentenne in crisi: auto, moto, attrezzi sportivi mai usati, abbonamenti in palestra o corsi di crescita personale. La Corte vuole l'importo speso.",
+				"Si chiede a Cume e Steve di raccontare il momento più imbarazzante in cui hanno dovuto ammettere di non capire più un riferimento culturale dei più giovani. La Corte include social, musica e slang.",
+				"La Corte domanda agli imputati quale sia stato il peggior bilancio fatto sulla propria vita alla vigilia dei 30 anni. Si accettano pianti, promesse non mantenute e confronti con gli amici."
 			]
 		};
 
@@ -993,7 +993,7 @@
 			timerEnabled: false,
 			timerSeconds: 60,
 			customOnly: false,
-			laureaMode: false
+			trentesimoMode: false
 		};
 
 		// ── Timer ──
@@ -1071,7 +1071,7 @@
 				timerEnabled: false,
 				timerSeconds: 60,
 				customOnly: false,
-				laureaMode: false
+				trentesimoMode: false
 			};
 			localStorage.removeItem(STORAGE_KEY);
 		}
@@ -1189,13 +1189,13 @@
 		// ── Prompt selection ──
 		function buildAvailablePrompts() {
 			state.availablePrompts = [];
-			if (state.laureaMode) {
-				LAUREA_PRESET.accuse.forEach((text, i) => {
+			if (state.trentesimoMode) {
+				TRENTESIMO_PRESET.accuse.forEach((text, i) => {
 					state.availablePrompts.push({
 						index: 20000 + i,
 						text: text,
-						category: 'Laurea',
-						icon: '🎓',
+						category: 'Trentesimo',
+						icon: '🎂',
 						color: '#f39c12'
 					});
 				});
@@ -1306,13 +1306,13 @@
 				<div class="container">
 					<div class="setup-card" style="border-color:rgba(243,156,18,0.45);background:rgba(243,156,18,0.06)">
 						<div class="toggle-row">
-							<label style="font-size:14px;font-weight:700;color:#f39c12">🎓 Modalità Laurea Cume e Steve</label>
+							<label style="font-size:14px;font-weight:700;color:#f39c12">🎂 Modalità Trentesimo di Cume e Steve</label>
 							<label class="toggle">
-								<input type="checkbox" id="laureaToggle">
+								<input type="checkbox" id="trentesimoToggle">
 								<span class="toggle-slider"></span>
 							</label>
 						</div>
-						<p style="font-size:11px;opacity:0.6;margin-top:6px">Preset dedicato: <strong>Cume</strong> vs <strong>Steve</strong>, 8 capi d'accusa specifici, timer di 1 minuto. Ignora tutte le altre impostazioni.</p>
+						<p style="font-size:11px;opacity:0.6;margin-top:6px">Preset dedicato: <strong>Cume</strong> vs <strong>Steve</strong>, 8 capi d'accusa specifici per il trentesimo compleanno, timer di 1 minuto. Ignora tutte le altre impostazioni.</p>
 					</div>
 					<div class="setup-card">
 						<h2>👤 Imputati</h2>
@@ -1700,11 +1700,11 @@
 			const timerConfig = document.getElementById('timerConfig');
 
 			if (p1Input && p2Input) {
-				// Helper: lock/unlock non-laurea setup cards
-				const applyLaureaLock = (on) => {
+				// Helper: lock/unlock non-trentesimo setup cards
+				const applyTrentesimoLock = (on) => {
 					const cards = document.querySelectorAll('.setup-card');
 					cards.forEach((card, i) => {
-						if (i === 0) return; // skip laurea card itself
+						if (i === 0) return; // skip trentesimo card itself
 						card.style.opacity = on ? '0.35' : '';
 						card.style.pointerEvents = on ? 'none' : '';
 					});
@@ -1719,7 +1719,7 @@
 						timer: timerToggle ? timerToggle.checked : false,
 						timerDur: document.getElementById('timerDuration')?.value || '60',
 						customOnly: document.getElementById('customOnlyToggle')?.checked || false,
-						laurea: document.getElementById('laureaToggle')?.checked || false
+						trentesimo: document.getElementById('trentesimoToggle')?.checked || false
 					};
 					render();
 					const els = {
@@ -1731,7 +1731,7 @@
 						timerCfg: document.getElementById('timerConfig'),
 						co: document.getElementById('customOnlyToggle'),
 						coHint: document.getElementById('customOnlyHint'),
-						laurea: document.getElementById('laureaToggle')
+						trentesimo: document.getElementById('trentesimoToggle')
 					};
 					if (els.p1) els.p1.value = formState.p1;
 					if (els.p2) els.p2.value = formState.p2;
@@ -1749,17 +1749,17 @@
 							el.style.pointerEvents = formState.customOnly ? 'none' : '';
 						});
 					}
-					if (els.laurea) {
-						els.laurea.checked = formState.laurea;
-						applyLaureaLock(formState.laurea);
+					if (els.trentesimo) {
+						els.trentesimo.checked = formState.trentesimo;
+						applyTrentesimoLock(formState.trentesimo);
 					}
 				};
 
 				const validateSetup = () => {
-					const laureaEl = document.getElementById('laureaToggle');
-					const isLaurea = laureaEl && laureaEl.checked;
+					const trentesimoEl = document.getElementById('trentesimoToggle');
+					const isTrentesimo = trentesimoEl && trentesimoEl.checked;
 					const curBtn = document.getElementById('startBtn');
-					if (isLaurea) {
+					if (isTrentesimo) {
 						if (curBtn) curBtn.disabled = false;
 						return;
 					}
@@ -1787,12 +1787,12 @@
 					});
 				}
 
-				// Laurea preset toggle
-				const laureaToggle = document.getElementById('laureaToggle');
-				if (laureaToggle) {
-					applyLaureaLock(laureaToggle.checked);
-					laureaToggle.addEventListener('change', () => {
-						applyLaureaLock(laureaToggle.checked);
+				// Trentesimo preset toggle
+				const trentesimoToggle = document.getElementById('trentesimoToggle');
+				if (trentesimoToggle) {
+					applyTrentesimoLock(trentesimoToggle.checked);
+					trentesimoToggle.addEventListener('change', () => {
+						applyTrentesimoLock(trentesimoToggle.checked);
 						validateSetup();
 					});
 				}
@@ -1857,14 +1857,14 @@
 
 			if (startBtn) {
 				startBtn.addEventListener('click', () => {
-					const laureaEl = document.getElementById('laureaToggle');
-					state.laureaMode = laureaEl ? laureaEl.checked : false;
-					if (state.laureaMode) {
-						state.p1Name = LAUREA_PRESET.p1;
-						state.p2Name = LAUREA_PRESET.p2;
-						state.totalRounds = LAUREA_PRESET.rounds;
+					const trentesimoEl = document.getElementById('trentesimoToggle');
+					state.trentesimoMode = trentesimoEl ? trentesimoEl.checked : false;
+					if (state.trentesimoMode) {
+						state.p1Name = TRENTESIMO_PRESET.p1;
+						state.p2Name = TRENTESIMO_PRESET.p2;
+						state.totalRounds = TRENTESIMO_PRESET.rounds;
 						state.timerEnabled = true;
-						state.timerSeconds = LAUREA_PRESET.timerSeconds;
+						state.timerSeconds = TRENTESIMO_PRESET.timerSeconds;
 						state.customOnly = false;
 					} else {
 						state.p1Name = document.getElementById('p1name').value.trim();
