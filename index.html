@@ -1411,7 +1411,7 @@
 				p => !state.usedIndices.includes(p.index)
 			);
 			if (available.length === 0) return null;
-			const chosen = pick(available);
+			const chosen = state.trentesimoMode ? available[0] : pick(available);
 			state.usedIndices.push(chosen.index);
 			return chosen;
 		}
