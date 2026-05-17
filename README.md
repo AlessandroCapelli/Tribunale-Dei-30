@@ -48,8 +48,10 @@ L'app fornisce al giudice testi scritti in legalese goliardico da leggere ad alt
 ## 🗂️ Struttura
 
 ```
-├── index.html      # App principale (HTML/CSS/JS standalone)
-├── data.json       # 200 capi d'accusa suddivisi in 4 categorie
+├── index.html      # Shell minimale
+├── styles.css      # Stili e animazioni
+├── app.js          # Logica di gioco e rendering
+├── data.json       # Testi UI, narrative e 200 capi d'accusa
 └── README.md
 ```
 
@@ -64,17 +66,25 @@ L'app fornisce al giudice testi scritti in legalese goliardico da leggere ad alt
 - **Fedina Penale**: schermata finale screenshot-friendly con il verdetto
 - **Animazioni**: transizioni, gavel smash, shake, glow pulse, timer countdown
 - **Persistenza**: lo stato del gioco si salva in localStorage (ripresa automatica se il browser si chiude)
+- **Testi centralizzati**: tutti i testi (UI, narrative, capi d'accusa) sono in `data.json` per traduzione/personalizzazione immediata
 - **Zero dipendenze**: HTML/CSS/JS puro, nessun framework, caricamento istantaneo
 
 ## ✏️ Personalizzazione
 
-Tutti i capi d'accusa sono nel file `data.json`. Puoi:
+Tutto il contenuto testuale dell'app vive in `data.json`. Struttura principale:
 
-- **Modificare** i prompt esistenti per adattarli ai festeggiati
-- **Aggiungere** nuovi prompt a una categoria
-- **Creare nuove categorie** aggiungendo un oggetto con `category`, `icon`, `color` e `prompts`
+```json
+{
+	"ui": { /* etichette UI, bottoni, hint, titolo, locale, icone */ },
+	"customPrompts": { "category": "Personalizzate", "icon": "🎯", "color": "#9b59b6" },
+	"narr": { /* template narrativi del giudice, 9 categorie */ },
+	"categories": [ /* array di categorie con prompts */ ]
+}
+```
 
-Esempio di struttura:
+### Aggiungere o modificare capi d'accusa
+
+Aggiungi un oggetto al campo `categories`:
 
 ```json
 {
@@ -90,10 +100,28 @@ Esempio di struttura:
 
 In alternativa, le accuse personalizzate possono essere aggiunte direttamente dall'app durante il setup, senza modificare il file.
 
+### Tradurre o riscrivere i testi narrativi
+
+I template narrativi sono in `narr.*` e usano placeholder `{p1}`, `{p2}`, `{judge}`, `{name}`, `{n}`, `{tot}`, `{winner}`, `{loser}`, ecc. Esempio:
+
+```json
+"callPlayer": [
+	"Ha la parola l'imputato <strong>{name}</strong>. La Corte ricorda che..."
+]
+```
+
+### Cambiare lingua
+
+Modifica `data.json`:
+- `ui.htmlTitle`, `ui.locale`, `ui.dateFormat` per titolo e formattazione data
+- `ui.*` per tutte le etichette UI
+- `narr.*` per le narrative del giudice
+- `categories[*].category` e `prompts[*]` per i capi d'accusa
+
 ## 🚀 Deploy su GitHub Pages
 
 1. Crea un nuovo repository su GitHub
-2. Carica `index.html`, `data.json` e `README.md`
+2. Carica `index.html`, `styles.css`, `app.js`, `data.json` e `README.md`
 3. Vai in **Settings → Pages**
 4. Seleziona il branch `main` e la cartella `/ (root)`
 5. In pochi secondi il sito sarà live
