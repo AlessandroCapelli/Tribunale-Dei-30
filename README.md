@@ -6,12 +6,12 @@ Un gioco goliardico a tema tribunale per feste di compleanno dei 30 anni. Due im
 
 ### Ruoli
 
-| Ruolo | Chi | Cosa fa |
-|-------|-----|---------|
-| **Giudice** | Un amico (possibilmente travestito da magistrato) | Usa l'app, legge i testi narrativi ad alta voce, modera il dibattimento, assegna penalità |
-| **Imputato 1** | Festeggiato o sfidante | Confessa le proprie storie peggiori |
-| **Imputato 2** | Festeggiato o sfidante | Confessa le proprie storie peggiori |
-| **Giuria** | Tutti gli altri presenti alla festa | Vota per alzata di mano chi ha fatto peggio |
+| Ruolo          | Chi                                               | Cosa fa                                                                                   |
+| -------------- | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **Giudice**    | Un amico (possibilmente travestito da magistrato) | Usa l'app, legge i testi narrativi ad alta voce, modera il dibattimento, assegna penalità |
+| **Imputato 1** | Festeggiato o sfidante                            | Confessa le proprie storie peggiori                                                       |
+| **Imputato 2** | Festeggiato o sfidante                            | Confessa le proprie storie peggiori                                                       |
+| **Giuria**     | Tutti gli altri presenti alla festa               | Vota per alzata di mano chi ha fatto peggio                                               |
 
 ### Setup
 
@@ -78,13 +78,13 @@ Esempio di struttura:
 
 ```json
 {
-  "category": "Nome Categoria",
-  "icon": "🎯",
-  "color": "#e74c3c",
-  "prompts": [
-    "Gli imputati confessino il peggior episodio di ... La Corte esige dettagli.",
-    "La Corte domanda agli imputati chi abbia ..."
-  ]
+	"category": "Nome Categoria",
+	"icon": "🎯",
+	"color": "#e74c3c",
+	"prompts": [
+		"Gli imputati confessino il peggior episodio di ... La Corte esige dettagli.",
+		"La Corte domanda agli imputati chi abbia ..."
+	]
 }
 ```
 
