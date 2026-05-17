@@ -56,7 +56,6 @@
 			max-width: 540px;
 		}
 
-		/* Setup */
 		.setup-card {
 			background: rgba(255, 255, 255, 0.05);
 			border: 1px solid rgba(255, 255, 255, 0.1);
@@ -138,7 +137,6 @@
 			transform: scale(1.05);
 		}
 
-		/* Custom accusations */
 		.custom-input-row {
 			display: flex;
 			gap: 8px;
@@ -218,7 +216,6 @@
 			margin-bottom: 8px;
 		}
 
-		/* Toggle row */
 		.toggle-row {
 			display: flex;
 			align-items: center;
@@ -272,7 +269,6 @@
 			transform: translateX(20px);
 		}
 
-		/* Buttons */
 		.btn-main {
 			width: 100%;
 			background: linear-gradient(135deg, #e74c3c, #c0392b);
@@ -322,7 +318,6 @@
 			transform: scale(0.97);
 		}
 
-		/* Game card */
 		.game-card {
 			background: rgba(255, 255, 255, 0.05);
 			border: 1px solid rgba(255, 255, 255, 0.1);
@@ -332,7 +327,6 @@
 			text-align: center;
 		}
 
-		/* Scoreboard */
 		.scoreboard {
 			display: flex;
 			justify-content: space-between;
@@ -405,7 +399,6 @@
 			margin-bottom: 16px;
 		}
 
-		/* Narration */
 		.narration {
 			background: rgba(243, 156, 18, 0.08);
 			border-left: 3px solid #f39c12;
@@ -428,7 +421,6 @@
 			margin-bottom: 8px;
 		}
 
-		/* Charge */
 		.charge-text {
 			font-size: 16px;
 			line-height: 1.7;
@@ -444,7 +436,6 @@
 			margin-bottom: 8px;
 		}
 
-		/* Timer */
 		.timer-container {
 			display: flex;
 			justify-content: center;
@@ -501,7 +492,6 @@
 			font-weight: 800;
 		}
 
-		/* Vote buttons */
 		.vote-buttons {
 			display: flex;
 			flex-direction: column;
@@ -556,7 +546,6 @@
 			background: rgba(243, 156, 18, 0.3);
 		}
 
-		/* Result */
 		.result-icon {
 			font-size: 56px;
 			margin-bottom: 12px;
@@ -574,7 +563,6 @@
 			margin-bottom: 16px;
 		}
 
-		/* Verdict animation */
 		.verdict-guilty .result-icon {
 			animation: gavelSmash 0.6s ease;
 		}
@@ -587,7 +575,6 @@
 			animation: scalePop 0.5s ease;
 		}
 
-		/* Rounds recap */
 		.rounds-recap {
 			text-align: left;
 			margin: 16px 0;
@@ -615,7 +602,6 @@
 			text-align: right;
 		}
 
-		/* Fedina Penale card */
 		.fedina-card {
 			background: linear-gradient(145deg, #1a1a2e, #0f3460);
 			border: 2px solid rgba(243, 156, 18, 0.4);
@@ -720,7 +706,6 @@
 			font-style: italic;
 		}
 
-		/* Penalty floating button */
 		.penalty-fab {
 			position: fixed;
 			bottom: 20px;
@@ -746,7 +731,6 @@
 			transform: scale(0.9);
 		}
 
-		/* Modal */
 		.modal-overlay {
 			position: fixed;
 			top: 0;
@@ -815,7 +799,6 @@
 			opacity: 0.6;
 		}
 
-		/* Toast */
 		.toast {
 			position: fixed;
 			top: 20px;
@@ -834,7 +817,6 @@
 			max-width: 90%;
 		}
 
-		/* ── Animations ── */
 		@keyframes shimmer {
 
 			0%,
@@ -1056,10 +1038,8 @@
 	</div>
 
 	<script>
-		// ── Data ──
 		let data = [];
 
-		// ── Custom accusations ──
 		const CUSTOM_KEY = 'tribunale30_custom';
 
 		function loadCustom() {
@@ -1074,7 +1054,6 @@
 			localStorage.setItem(CUSTOM_KEY, JSON.stringify(list));
 		}
 
-		// ── Preset: Trentesimo di Cume e Steve ──
 		const TRENTESIMO_PRESET = {
 			p1: 'Cume',
 			p2: 'Steve',
@@ -1093,7 +1072,6 @@
 			]
 		};
 
-		// ── Game state ──
 		let state = {
 			phase: 'setup',
 			p1Name: '',
@@ -1115,7 +1093,6 @@
 			trentesimoMode: false
 		};
 
-		// ── Timer ──
 		let timerInterval = null;
 		let timerRemaining = 0;
 
@@ -1153,7 +1130,6 @@
 			else if (pct <= 0.4) el.classList.add('warning');
 		}
 
-		// ── LocalStorage ──
 		const STORAGE_KEY = 'tribunale30_state';
 
 		function saveState() {
@@ -1199,7 +1175,6 @@
 			localStorage.removeItem(STORAGE_KEY);
 		}
 
-		// ── Narration templates ──
 		const NARR = {
 			opening: [
 				(p1, p2, judge) =>
@@ -1338,7 +1313,6 @@
 			return arr[Math.floor(Math.random() * arr.length)];
 		}
 
-		// ── Fetch data ──
 		fetch('data.json')
 			.then(r => r.json())
 			.then(json => {
@@ -1354,7 +1328,6 @@
 					'<div class="loading">Errore nel caricamento dei fascicoli processuali.</div>';
 			});
 
-		// ── Prompt selection ──
 		function buildAvailablePrompts() {
 			state.availablePrompts = [];
 			if (state.trentesimoMode) {
@@ -1387,7 +1360,6 @@
 					});
 				});
 			}
-			// Add custom accusations (always in mixed mode, exclusively in custom-only mode)
 			customs.forEach((text, i) => {
 				state.availablePrompts.push({
 					index: 10000 + i,
@@ -1409,7 +1381,6 @@
 			return chosen;
 		}
 
-		// ── Render ──
 		function render() {
 			stopTimer();
 			const app = document.getElementById('app');
@@ -1450,13 +1421,11 @@
 
 			bindEvents();
 
-			// Start timer on player turns
 			if (state.timerEnabled && (state.phase === 'player1' || state.phase === 'player2')) {
 				startTimer();
 			}
 		}
 
-		// ── Setup ──
 		function renderSetup() {
 			const catFilters = data.map((cat, i) => {
 				const active = state.selectedCats.includes(i);
@@ -1567,7 +1536,6 @@
 			`;
 		}
 
-		// ── Opening ──
 		function renderOpening() {
 			const text = pick(NARR.opening)(state.p1Name, state.p2Name, state.judgeName);
 			return `
@@ -1588,7 +1556,6 @@
 			`;
 		}
 
-		// ── Charge ──
 		function renderCharge() {
 			const prompt = state.currentPrompt;
 			const introText = pick(NARR.roundIntro)(state.currentRound, state.totalRounds);
@@ -1609,7 +1576,6 @@
 			`;
 		}
 
-		// ── Player Turn ──
 		function renderPlayerTurn(playerNum) {
 			const name = playerNum === 1 ? state.p1Name : state.p2Name;
 			const callText = pick(NARR.callPlayer)(name);
@@ -1648,7 +1614,6 @@
 			`;
 		}
 
-		// ── Vote ──
 		function renderVote() {
 			const voteText = pick(NARR.callVote);
 			return `
@@ -1671,7 +1636,6 @@
 			`;
 		}
 
-		// ── Result ──
 		function renderResult() {
 			const lastResult = state.roundResults[state.roundResults.length - 1];
 			let icon, text, narration, penalty, verdictClass;
@@ -1712,7 +1676,6 @@
 			`;
 		}
 
-		// ── Final ──
 		function renderFinal() {
 			const isDraw = state.p1Score === state.p2Score;
 			let narration;
@@ -1741,7 +1704,6 @@
 				</div>`;
 			}).join('');
 
-			// Fedina Penale
 			const draws = state.roundResults.filter(r => r === 'draw').length;
 			let verdictText, verdictClass;
 			if (isDraw) {
@@ -1804,7 +1766,6 @@
 			`;
 		}
 
-		// ── Scoreboard ──
 		function renderScoreboard(activeTurn) {
 			return `
 				<div class="scoreboard">
@@ -1823,7 +1784,6 @@
 			`;
 		}
 
-		// ── Penalty FAB ──
 		function renderPenaltyFab() {
 			return `<button class="penalty-fab" id="penaltyFab" title="Penalità">🔨</button>`;
 		}
@@ -1888,9 +1848,7 @@
 			setTimeout(() => toast.remove(), 5000);
 		}
 
-		// ── Events ──
 		function bindEvents() {
-			// Setup
 			const p1Input = document.getElementById('p1name');
 			const p2Input = document.getElementById('p2name');
 			const roundsSelect = document.getElementById('rounds');
@@ -1900,17 +1858,15 @@
 
 			const judgeInput = document.getElementById('judgeName');
 			if (p1Input && p2Input) {
-				// Helper: lock/unlock non-trentesimo setup cards
 				const applyTrentesimoLock = (on) => {
 					const cards = document.querySelectorAll('.setup-card');
 					cards.forEach((card, i) => {
-						if (i === 0) return; // skip trentesimo card itself
+						if (i === 0) return;
 						card.style.opacity = on ? '0.35' : '';
 						card.style.pointerEvents = on ? 'none' : '';
 					});
 				};
 
-				// Helper: save all form values, re-render, restore them
 				const reRenderSetup = () => {
 					const formState = {
 						p1: p1Input.value,
@@ -1986,14 +1942,12 @@
 				if (roundsSelect) roundsSelect.addEventListener('change', validateSetup);
 				validateSetup();
 
-				// Timer toggle
 				if (timerToggle) {
 					timerToggle.addEventListener('change', () => {
 						timerConfig.classList.toggle('hidden', !timerToggle.checked);
 					});
 				}
 
-				// Trentesimo preset toggle
 				const trentesimoToggle = document.getElementById('trentesimoToggle');
 				if (trentesimoToggle) {
 					applyTrentesimoLock(trentesimoToggle.checked);
@@ -2003,7 +1957,6 @@
 					});
 				}
 
-				// Custom-only toggle
 				const customOnlyToggle = document.getElementById('customOnlyToggle');
 				const customOnlyHint = document.getElementById('customOnlyHint');
 				if (customOnlyToggle) {
@@ -2018,7 +1971,6 @@
 					});
 				}
 
-				// Category filters
 				document.querySelectorAll('.cat-filter').forEach(el => {
 					el.addEventListener('click', () => {
 						const idx = parseInt(el.dataset.cat);
@@ -2030,7 +1982,6 @@
 					});
 				});
 
-				// Custom accusations
 				const addBtn = document.getElementById('addCustomBtn');
 				const customInput = document.getElementById('customInput');
 				if (addBtn && customInput) {
@@ -2100,13 +2051,11 @@
 				});
 			}
 
-			// Opening
 			const proceedBtn = document.getElementById('proceedBtn');
 			if (proceedBtn) {
 				proceedBtn.addEventListener('click', () => startNextRound());
 			}
 
-			// Charge → Player 1
 			const callP1Btn = document.getElementById('callP1Btn');
 			if (callP1Btn) {
 				callP1Btn.addEventListener('click', () => {
@@ -2116,7 +2065,6 @@
 				});
 			}
 
-			// Player 1 → Player 2
 			const callP2Btn = document.getElementById('callP2Btn');
 			if (callP2Btn) {
 				callP2Btn.addEventListener('click', () => {
@@ -2126,7 +2074,6 @@
 				});
 			}
 
-			// Player 2 → Vote
 			const callVoteBtn = document.getElementById('callVoteBtn');
 			if (callVoteBtn) {
 				callVoteBtn.addEventListener('click', () => {
@@ -2136,7 +2083,6 @@
 				});
 			}
 
-			// Vote
 			document.querySelectorAll('[data-vote]').forEach(btn => {
 				btn.addEventListener('click', () => {
 					const vote = btn.dataset.vote;
@@ -2149,7 +2095,6 @@
 				});
 			});
 
-			// Next round / Final
 			const nextRoundBtn = document.getElementById('nextRoundBtn');
 			if (nextRoundBtn) {
 				nextRoundBtn.addEventListener('click', () => {
@@ -2163,7 +2108,6 @@
 				});
 			}
 
-			// New trial
 			const newTrialBtn = document.getElementById('newTrialBtn');
 			if (newTrialBtn) {
 				newTrialBtn.addEventListener('click', () => {
@@ -2176,7 +2120,6 @@
 				});
 			}
 
-			// Penalty FAB
 			const penaltyFab = document.getElementById('penaltyFab');
 			if (penaltyFab) {
 				penaltyFab.addEventListener('click', showPenaltyModal);
