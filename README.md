@@ -75,10 +75,20 @@ Tutto il contenuto testuale dell'app vive in `data.json`. Struttura principale:
 
 ```json
 {
-	"ui": { /* etichette UI, bottoni, hint, titolo, locale, icone */ },
-	"customPrompts": { "category": "Personalizzate", "icon": "🎯", "color": "#9b59b6" },
-	"narr": { /* template narrativi del giudice, 9 categorie */ },
-	"categories": [ /* array di categorie con prompts */ ]
+	"ui": {
+		/* etichette UI, bottoni, hint, titolo, locale, icone */
+	},
+	"customPrompts": {
+		"category": "Personalizzate",
+		"icon": "🎯",
+		"color": "#9b59b6"
+	},
+	"narr": {
+		/* template narrativi del giudice, 9 categorie */
+	},
+	"categories": [
+		/* array di categorie con prompts */
+	]
 }
 ```
 
@@ -113,6 +123,7 @@ I template narrativi sono in `narr.*` e usano placeholder `{p1}`, `{p2}`, `{judg
 ### Cambiare lingua
 
 Modifica `data.json`:
+
 - `ui.htmlTitle`, `ui.locale`, `ui.dateFormat` per titolo e formattazione data
 - `ui.*` per tutte le etichette UI
 - `narr.*` per le narrative del giudice

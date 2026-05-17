@@ -1,0 +1,25 @@
+{
+	"name": "tribunale-dei-30",
+	"version": "1.0.0",
+	"description": "Un gioco goliardico a tema tribunale per feste di compleanno dei 30 anni. Due imputati si sfidano davanti a una giuria popolare (gli amici alla festa), moderati da un giudice (un amico travestito da magistrato). Ad ogni round viene estratto un capo d'accusa: entrambi gli imputati devono confessare la propria storia peggiore legata al tema. La giuria vota chi ha fatto peggio, e il colpevole beve.",
+	"main": "app.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/AlessandroCapelli/Tribunale-Dei-30.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "UNLICENSED",
+	"private": true,
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/AlessandroCapelli/Tribunale-Dei-30/issues"
+	},
+	"homepage": "https://github.com/AlessandroCapelli/Tribunale-Dei-30#readme",
+	"devDependencies": {
+		"jsdom": "^29.1.1"
+	}
+}

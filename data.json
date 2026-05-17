@@ -8,8 +8,6 @@
 			"gavel": "🔨",
 			"delete": "✕"
 		},
-		"loading": "⚖️ Caricamento fascicoli processuali...",
-		"loadError": "Errore nel caricamento dei fascicoli processuali.",
 		"resetConfirm": "Sei sicuro? I fascicoli processuali verranno archiviati e la sessione verrà chiusa.",
 		"timerExpired": "⏰ Tempo scaduto! La Corte intima di concludere immediatamente!",
 		"insufficientPrompts": "⚠️ Solo {n} domande disponibili. Riduci i round o aggiungi categorie.",
